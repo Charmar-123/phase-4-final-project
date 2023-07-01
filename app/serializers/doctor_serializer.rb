@@ -1,3 +1,3 @@
 class DoctorSerializer < ActiveModel::Serializer
-  attributes :id, :name, :department, :image_url
+  attributes :id, :name, :department, :image_url, :description
 end

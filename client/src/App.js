@@ -1,4 +1,4 @@
-import ActionAreaCard from './components/DoctorCard';
+
 import './App.css';
 import { useEffect, useState } from 'react';
 import Doctors from './components/Doctors';
@@ -14,6 +14,8 @@ const App = () => {
       .then(res => res.json())
       .then(setDoctorsData)
   }, [])
+
+  console.log(doctorsData);
 
   return (
     <>
