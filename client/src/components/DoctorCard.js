@@ -10,10 +10,10 @@ const DoctorCard = ({name, department, image_url, description}) => {
 
     const [clickedCard, setClickedCard] = useState(false)
   return (
-    <Card sx={{ width:345, height:400}}>
-      <CardActionArea onMouseEnter={() => {
+    <Card sx={{ width:345, height:400}} onMouseEnter={() => {
         setClickedCard(true)}} onMouseLeave={() => {
             setClickedCard(false)}}>
+      <CardActionArea >
         <CardMedia
           component="img"
           style={{width: "50%", marginLeft: "auto", marginRight: "auto", display:clickedCard ? "none" : ""}}
