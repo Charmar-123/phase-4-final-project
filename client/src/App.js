@@ -3,6 +3,7 @@ import './App.css';
 import { useEffect, useState } from 'react';
 import Doctors from './components/Doctors';
 import DoctorCard from './components/DoctorCard';
+import NavigationBar from './components/NavigationBar';
 
 
 const App = () => {
@@ -19,6 +20,7 @@ const App = () => {
 
   return (
     <>
+      <NavigationBar />
       <Doctors doctorsData={doctorsData} />
     </>
 
