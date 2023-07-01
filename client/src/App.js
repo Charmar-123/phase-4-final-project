@@ -14,6 +14,7 @@ const App = () => {
       .then(res => res.json())
       .then(setDoctorsData)
   }, [])
+
   return (
     <>
       <Doctors doctorsData={doctorsData} />
