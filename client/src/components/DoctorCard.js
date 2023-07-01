@@ -10,13 +10,13 @@ const DoctorCard = ({name, department, image_url, description}) => {
 
     const [clickedCard, setClickedCard] = useState(false)
   return (
-    <Card sx={{ width:345, height:400}} onMouseEnter={() => {
+    <Card sx={{ width:345, height:400, margin:"auto", marginTop:"3rem"}}onMouseEnter={() => {
         setClickedCard(true)}} onMouseLeave={() => {
             setClickedCard(false)}}>
-      <CardActionArea >
+
         <CardMedia
           component="img"
-          style={{width: "50%", marginLeft: "auto", marginRight: "auto", display:clickedCard ? "none" : ""}}
+          style={{width: "50%", marginLeft: "auto", marginRight: "auto" ,display:clickedCard ? "none" : ""}}
           height="300"
           image={image_url}
           alt="doctor_picture"
@@ -32,7 +32,6 @@ const DoctorCard = ({name, department, image_url, description}) => {
             {description}
           </Typography>
         </CardContent>
-      </CardActionArea>
     </Card>
   );
 }

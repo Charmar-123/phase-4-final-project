@@ -7,7 +7,7 @@ const Doctors = ({ doctorsData }) => {
 
     const doctors = doctorsData.map(({ id, name, department, image_url, description }) => {
         return (
-            <Grid item xs={12} sm={4} key={id}>
+ 
                 <DoctorCard
                     key={id}
                     name={name}
@@ -15,11 +15,12 @@ const Doctors = ({ doctorsData }) => {
                     image_url={image_url}
                     description={description}
                 />
-            </Grid>
         )
     })
     return (
-        <Grid container spacing={2}>
+        <Grid container spacing={2}
+        justifyContent="center"
+        alignItems="center">
             {doctors}
         </Grid>
     )
