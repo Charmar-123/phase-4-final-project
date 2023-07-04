@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import Doctors from './components/Doctors';
 import DoctorCard from './components/DoctorCard';
 import NavigationBar from './components/NavigationBar';
+import Home from './components/Home';
 
 
 const App = () => {
@@ -21,6 +22,7 @@ const App = () => {
   return (
     <>
       <NavigationBar />
+      {/* <Home/> */}
       <Doctors doctorsData={doctorsData} />
     </>
 

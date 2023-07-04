@@ -4,6 +4,9 @@ class CreatePatients < ActiveRecord::Migration[6.1]
       t.string :name
       t.string :age
       t.string :history
+      t.string :email
+      t.string :password_digest
+
 
       t.timestamps
     end

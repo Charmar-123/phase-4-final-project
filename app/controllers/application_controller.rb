@@ -4,7 +4,25 @@ class ApplicationController < ActionController::API
   rescue_from ActiveRecord::RecordInvalid, with: :render_unprocessable_entity
   rescue_from ActiveRecord::RecordNotFound, with: :render_not_found
 
+# Change variable for patient admin and doctor
+    # before_action
+    before_action :authorized_user 
 
+    # current_user and authorized_user
+
+    # change patient to be current patient in patient controller
+    # add a skip_before_action in session controller except for create and for patient, doctors, and admin
+    def current_user 
+        user = User.find_by(id: session[:user_id])
+        user
+    end  
+
+    def authorized_user
+        render json: {errors: "Not Authorized"}, status: :unauthorized unless current_user
+    end 
+
+
+  private 
   def render_unprocessable_entity(invalid)
       render json: {errors: invalid.record.errors}, status: :unprocessable_entity
   end 

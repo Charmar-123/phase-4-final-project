@@ -1,3 +1,17 @@
+# Admins seed data
+
+admins_data =[
+  name: "Stephanie Stevens",
+  #  email: "#{self.name.gsub(/\b(\w)\w*\b/) { $1 }}"
+]
+admins_data.each do |admin|
+Admin.create(
+  name: admin[:name],
+  email: admin[:name].sub(/^(\w)\w*\s(\w+)/, '\1\2@admin.sgh.com'),
+  password_digest: BCrypt::Password.create("1234")
+)
+end
+
 # Doctors' seed data
 doctor_names = [
     { name: "Meredith Grey", department: "General Surgery" , image_url: "https://upload.wikimedia.org/wikipedia/en/5/53/Greys-Anatomy-Season-7-Promo-9.jpg", description: "Dr. Meredith Grey is a highly skilled and compassionate general surgeon. With her exceptional surgical expertise and unwavering dedication, she strives to provide the highest standard of care for her patients. Driven by a deep sense of empathy, she goes above and beyond to ensure her patients feel heard, supported, and well-informed throughout their medical journey. Her commitment to excellence and genuine concern for the well-being of others make her a trusted and respected physician."},
@@ -25,7 +39,7 @@ doctor_names = [
   ]
   
   doctor_names.each do |doctor|
-    Doctor.create(name: doctor[:name], department: doctor[:department], image_url: doctor[:image_url], description: doctor[:description])
+    Doctor.create(name: doctor[:name], department: doctor[:department], image_url: doctor[:image_url], description: doctor[:description], admin_id: 1, email: doctor[:name].sub(/^(\w)\w*\s(\w+)/, '\1\2@doc.sgh.com'), password_digest: BCrypt::Password.create("1234"))
   end
   
   
@@ -147,3 +161,4 @@ doctor_names = [
       doctor_id: doctor_id)
   end
   
+

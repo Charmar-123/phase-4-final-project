@@ -10,10 +10,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_06_30_215858) do
+ActiveRecord::Schema.define(version: 2023_07_04_202247) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "admins", force: :cascade do |t|
+    t.string "name"
+    t.string "email"
+    t.string "password_digest"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
 
   create_table "appointments", force: :cascade do |t|
     t.string "date"
@@ -32,18 +40,25 @@ ActiveRecord::Schema.define(version: 2023_06_30_215858) do
     t.string "department"
     t.string "image_url"
     t.text "description"
+    t.string "email"
+    t.string "password_digest"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.bigint "admin_id", null: false
+    t.index ["admin_id"], name: "index_doctors_on_admin_id"
   end
 
   create_table "patients", force: :cascade do |t|
     t.string "name"
     t.string "age"
     t.string "history"
+    t.string "email"
+    t.string "password_digest"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
 
   add_foreign_key "appointments", "doctors"
   add_foreign_key "appointments", "patients"
+  add_foreign_key "doctors", "admins"
 end
