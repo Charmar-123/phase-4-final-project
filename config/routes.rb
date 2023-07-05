@@ -7,7 +7,8 @@ Rails.application.routes.draw do
 
   # Custom routes
 
-  post '/login', to: 'sessions#create_doctor'
+  post '/doctor/login', to: 'sessions#create_doctor'
+  post '/patient/login', to: 'sessions#create_patient'
   delete '/logout', to: 'sessions#destroy'
   get '/authorized_user', to: 'doctors#show'
   # Routing logic: fallback requests for React Router.
