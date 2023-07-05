@@ -24,7 +24,7 @@ const App = () => {
     <>
       <NavigationBar />
       {/* <Home/> */}
-      {/* <DoctorPortal/> */}
+      <DoctorPortal/>
       <Doctors doctorsData={doctorsData} />
     </>
 
