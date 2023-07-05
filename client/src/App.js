@@ -5,6 +5,7 @@ import Doctors from './components/Doctors';
 import DoctorCard from './components/DoctorCard';
 import NavigationBar from './components/NavigationBar';
 import Home from './components/Home';
+import DoctorPortal from './components/DoctorPortal';
 
 
 const App = () => {
@@ -23,6 +24,7 @@ const App = () => {
     <>
       <NavigationBar />
       {/* <Home/> */}
+      {/* <DoctorPortal/> */}
       <Doctors doctorsData={doctorsData} />
     </>
 

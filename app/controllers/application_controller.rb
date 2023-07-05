@@ -13,7 +13,7 @@ class ApplicationController < ActionController::API
     # change patient to be current patient in patient controller
     # add a skip_before_action in session controller except for create and for patient, doctors, and admin
     def current_user 
-        user = User.find_by(id: session[:user_id])
+        user = Doctor.find_by(id: session[:user_id])
         user
     end  
 

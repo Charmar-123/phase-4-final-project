@@ -97,7 +97,8 @@ doctor_names = [
   ]
   
   patients_data.each do |patient|
-    Patient.create(name: patient[:name], age: patient[:age], history: patient[:history])
+    Patient.create(name: patient[:name], age: patient[:age], history: patient[:history], email: patient[:name].sub(/^(\w)\w*\s(\w+)/, '\1\2@ptn.sgh.com'),
+    password_digest: BCrypt::Password.create("1234") )
   end
   
   

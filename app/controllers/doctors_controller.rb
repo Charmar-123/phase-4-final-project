@@ -1,5 +1,7 @@
 class DoctorsController < ApplicationController
 
+    skip_before_action :authorized_user
+
     
     def index 
         render json: Doctor.all, status: :ok
@@ -8,6 +10,7 @@ class DoctorsController < ApplicationController
 
     
     def show
-        render json: Doctor.find(params[:id])
+        doctor = current_user
+        render json: doctor, status: :ok
     end
 end
