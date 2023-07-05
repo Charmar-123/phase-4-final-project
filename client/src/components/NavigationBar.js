@@ -7,6 +7,7 @@ import Button from '@mui/material/Button';
 import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
 import { Menu, MenuItem } from '@mui/material';
+import { Link } from 'react-router-dom';
 
 const NavigationBar = () => {
     const navItems = ['Home', 'About', 'Contact'];
@@ -16,11 +17,11 @@ const NavigationBar = () => {
                 <Toolbar>
                     <Typography variant="h6" sx={{ my: 2 }}>Grey Sloan Memorial Hospital</Typography>
                     <Box sx={{ display: { xs: 'none', sm: 'block',  flexGrow: 1  } }} marginLeft={3}>
-                        <Button sx={{ color: '#fff' }}>Home</Button>
-                        <Button sx={{ color: '#fff' }}>Our Doctors</Button>
-                        <Button sx={{ color: '#fff' }}>About Us</Button>
-                        <Button sx={{ color: '#fff' }}>Doctor Portal</Button>
-                        <Button sx={{ color: '#fff' }}>Admin Portal</Button>
+                        <Button as={Link} to={'/'} sx={{ color: '#fff' }}>Home</Button>
+                        <Button as={Link} to={'/doctors'} sx={{ color: '#fff' }}>Our Doctors</Button>
+                        <Button as={Link} sx={{ color: '#fff' }}>About Us</Button>
+                        <Button as={Link} to={'/doctor/login'} sx={{ color: '#fff' }}>Doctor Portal</Button>
+                        <Button as={Link} sx={{ color: '#fff' }}>Admin Portal</Button>
                     </Box>
                     <Button color="inherit">Login</Button>
                 </Toolbar>
