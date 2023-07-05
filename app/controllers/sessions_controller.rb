@@ -1,13 +1,14 @@
 class SessionsController < ApplicationController
 
-    skip_before_action :authorized_user, only: [:create]
+    skip_before_action :authorized_doctor, only: [:create_doctor]
+    skip_before_action :authorized_patient, only: [:create_patient]
 
     def create_doctor
         doctor = Doctor.find_by(email: params[:email])
         # byebug
 
         if doctor&.authenticate(params[:password])
-            session[:doctor_id] = doctor.id
+            session[:user_id] = doctor.id
             # byebug
             render json: doctor, serializer: SessionDoctorCreateSerializer
         else
@@ -20,7 +21,7 @@ class SessionsController < ApplicationController
         # byebug
 
         if patient&.authenticate(params[:password])
-            session[:patient_id] = patient.id
+            session[:user_id] = patient.id
             # byebug
             render json: patient, serializer: SessionPatientCreateSerializer
         else
@@ -33,4 +34,8 @@ class SessionsController < ApplicationController
         session.delete user_id
         head :no_content
     end
+    # def destroy_patient
+    #     session.delete patient_id
+    #     head :no_content
+    # end
 end

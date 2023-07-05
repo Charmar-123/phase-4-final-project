@@ -22,7 +22,7 @@ const NavigationBar = () => {
                         <Button as={Link} sx={{ color: '#fff' }}>About Us</Button>
                         <Button as={Link} to={'/doctor/login'} sx={{ color: '#fff' }}>Doctor Portal</Button>
                         <Button as={Link} sx={{ color: '#fff' }}>Admin Portal</Button>
-                        <Button as={Link} to={'/patient/portal'} sx={{ color: '#fff' }}>Patient Portal</Button>
+                        <Button as={Link} to={'/patient/login'} sx={{ color: '#fff' }}>Patient Portal</Button>
                     </Box>
                 </Toolbar>
             </AppBar>

@@ -1,6 +1,6 @@
 class DoctorsController < ApplicationController
 
-    skip_before_action :authorized_user, only: [:create]
+    skip_before_action :authorized_doctor, only: [:create]
 
     
     def index 
@@ -10,7 +10,7 @@ class DoctorsController < ApplicationController
 
     
     def show
-        doctor = current_user
+        doctor = current_doctor
         render json: doctor, status: :ok
     end
 end

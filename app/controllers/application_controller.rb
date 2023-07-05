@@ -6,19 +6,28 @@ class ApplicationController < ActionController::API
 
 # Change variable for patient admin and doctor
     # before_action
-    before_action :authorized_user 
+    before_action :authorized_doctor, :authorized_patient 
 
     # current_user and authorized_user
 
     # change patient to be current patient in patient controller
     # add a skip_before_action in session controller except for create and for patient, doctors, and admin
-    def current_user 
-        user = Doctor.find_by(id: session[:user_id])
-        user
+    def current_doctor 
+        doctor = Doctor.find_by(id: session[:user_id])
+        doctor
     end  
 
-    def authorized_user
-        render json: {errors: "Not Authorized"}, status: :unauthorized unless current_user
+    def authorized_doctor
+        render json: {errors: "Not Authorized"}, status: :unauthorized unless current_doctor
+    end 
+    
+    def current_patient
+        patient = Patient.find_by(id: session[:user_id])
+        patient
+    end  
+
+    def authorized_patient
+        render json: {errors: "Not Authorized"}, status: :unauthorized unless current_patient
     end 
 
 
