@@ -6,11 +6,15 @@ import DoctorCard from './components/DoctorCard';
 import NavigationBar from './components/NavigationBar';
 import Home from './components/Home';
 import DoctorPortal from './components/DoctorPortal';
+import PatientPortal from './components/PatientPortal';
+import DoctorPage from './components/DoctorPage';
 
 
 const App = () => {
 
   const [doctorsData, setDoctorsData] = useState([]);
+
+  const [loggedInDoctor, setLoggedInDoctor] = useState([]);
 
   useEffect(() => {
     fetch('/doctors')
@@ -24,8 +28,11 @@ const App = () => {
     <>
       <NavigationBar />
       {/* <Home/> */}
-      <DoctorPortal/>
-      <Doctors doctorsData={doctorsData} />
+      <DoctorPortal setLoggedInDoctor={setLoggedInDoctor}/>
+      <DoctorPage loggedInDoctor={loggedInDoctor}/>
+      {/* <PatientPortal/> */}
+
+      {/* <Doctors doctorsData={doctorsData} /> */}
     </>
 
   );

@@ -4,7 +4,7 @@ import { useState } from 'react'
 import { Container, Typography, TextField, Button,} from '@mui/material';
 
 
-const DoctorPortal = () => {
+const DoctorPortal = ({setLoggedInDoctor}) => {
 
     const [loginData, setLoginData] = useState({
         email: '',
@@ -38,6 +38,7 @@ const DoctorPortal = () => {
             if(res.ok){
                 res.json().then(user =>{
                     console.log(user);
+                    setLoggedInDoctor(user)
                 })
             }
             else {
