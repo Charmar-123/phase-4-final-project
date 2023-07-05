@@ -3,8 +3,10 @@ import { useState } from 'react'
 
 import { Container, Typography, TextField, Button,} from '@mui/material';
 
+import { useNavigate } from 'react-router-dom'
+const PatientPortal = ({setLoggedInPatient}) => {
 
-const PatientPortal = () => {
+    const navigate = useNavigate();
     const [loginData, setLoginData] = useState({
         email: '',
         password: ''
@@ -37,6 +39,8 @@ const PatientPortal = () => {
             if(res.ok){
                 res.json().then(user =>{
                     console.log(user);
+                    setLoggedInPatient(user)
+                    navigate('/patient')
                 })
             }
             else {

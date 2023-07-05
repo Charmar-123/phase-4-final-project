@@ -17,6 +17,7 @@ const App = () => {
   const [doctorsData, setDoctorsData] = useState([]);
 
   const [loggedInDoctor, setLoggedInDoctor] = useState([]);
+  const [loggedInPatient, setLoggedInPatient] = useState([]);
 
   useEffect(() => {
     fetch('/doctors')
@@ -34,8 +35,8 @@ const App = () => {
         <Route path='/' element={ <Doctors doctorsData={doctorsData} />}/>
         <Route path='/doctor' element={ <DoctorPage loggedInDoctor={loggedInDoctor}/>}/>
         <Route path='/doctor/login' element={<DoctorPortal setLoggedInDoctor={setLoggedInDoctor}/>}/>
-        <Route path='/patient' element={<PatientPage/>}/>
-        <Route path='/patient/login' element={<PatientPortal/>}/>
+        <Route path='/patient' element={<PatientPage loggedInPatient={loggedInPatient}/>}/>
+        <Route path='/patient/login' element={<PatientPortal setLoggedInPatient={setLoggedInPatient}/>}/>
 
       </Routes>
       {/* <Home/> */}

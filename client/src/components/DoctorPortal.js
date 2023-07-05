@@ -1,10 +1,13 @@
 import React from 'react'
 import { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 
 import { Container, Typography, TextField, Button,} from '@mui/material';
 
 
 const DoctorPortal = ({setLoggedInDoctor}) => {
+
+    const navigate = useNavigate();
 
     const [loginData, setLoginData] = useState({
         email: '',
@@ -39,6 +42,7 @@ const DoctorPortal = ({setLoggedInDoctor}) => {
                 res.json().then(user =>{
                     console.log(user);
                     setLoggedInDoctor(user)
+                    navigate('/doctor')
                 })
             }
             else {
