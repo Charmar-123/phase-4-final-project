@@ -32,9 +32,11 @@ class ApplicationController < ActionController::API
     def authorized_patient
         render json: {errors: "Not Authorized"}, status: :unauthorized unless current_patient
     end 
+
+
     def current_admin
-        admin = Admin.find_by(id: session[:admin])
-        patient
+      admin = Admin.find_by(id: session[:admin_id])
+        admin
     end  
 
     def authorized_admin

@@ -9,7 +9,7 @@ Rails.application.routes.draw do
 
   post '/doctor/login', to: 'sessions#create_doctor'
   post '/patient/login', to: 'sessions#create_patient'
-  delete '/logout', to: 'sessions#destroy'
+  delete '/logout', to: 'sessions#destroy_doctor'
   get '/authorized_doctor', to: 'doctors#show'
   # Routing logic: fallback requests for React Router.
   # Leave this here to help deploy your app later!
