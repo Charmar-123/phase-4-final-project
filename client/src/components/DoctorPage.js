@@ -11,7 +11,10 @@ const DoctorPage = () => {
   const {setLoggedInDoctor, loggedInDoctor} = useContext(UserContext);
 
   const {name, department} = loggedInDoctor
-  const patients = loggedInDoctor.patients
+  let patients = [];
+  if (Array.isArray(loggedInDoctor.patients)){
+    patients = loggedInDoctor.patients
+  }
 
 
 
@@ -28,16 +31,11 @@ const DoctorPage = () => {
         { field: 'email', headerName: 'Email', width: 300 },
       ];
       
-      const rows = [];
-      // if (Array.isArray(patients)){
-      //   patients.forEach(({id, name, age, history, email}) => {
-      //       rows.push({id: id,name: name, age: age, history: history, email: email})
-      //     console.log(rows);
-      //   })
-      //   console.log(rows);
-      // return rows
-      // }
-
+      const rows = patients.map(({id, name, age, history, email}) => {
+        return (
+          {id: id,name: name, age: age, history: history, email: email}
+        )
+      })
 
       const handleLogOut = () => {
         fetch('/logout',{

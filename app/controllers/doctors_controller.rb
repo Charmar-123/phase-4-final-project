@@ -14,7 +14,6 @@ class DoctorsController < ApplicationController
     
     def show
         doctor = current_doctor
-        byebug
         render json: doctor, status: :ok
     end
 end
