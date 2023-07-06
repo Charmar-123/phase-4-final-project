@@ -28,14 +28,16 @@ const DoctorPage = () => {
         { field: 'email', headerName: 'Email', width: 300 },
       ];
       
-      if (!patients) return <h1>Not logged in</h1>
+      const rows = [];
+      // if (Array.isArray(patients)){
+      //   patients.forEach(({id, name, age, history, email}) => {
+      //       rows.push({id: id,name: name, age: age, history: history, email: email})
+      //     console.log(rows);
+      //   })
+      //   console.log(rows);
+      // return rows
+      // }
 
-      
-      const rows = patients.map(({id, name, age, history, email}) => {
-        return (
-          {id: id,name: name, age: age, history: history, email: email}
-        )
-      })
 
       const handleLogOut = () => {
         fetch('/logout',{

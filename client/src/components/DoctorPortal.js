@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+import React, { useContext, useEffect } from 'react'
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 
@@ -8,6 +8,18 @@ import UserContext from './UserContext';
 
 
 const DoctorPortal = () => {
+
+    const [authenticate, setAuthenticate] = useState(false);
+
+    useEffect(() => {
+        fetch('/authorized/doctor')
+        .then(res=>{
+            if(res.ok){
+                console.log(res);
+                setAuthenticate(true)
+            }
+        })
+    }, [])
 
     const {setLoggedInDoctor} = useContext(UserContext);
 
@@ -54,6 +66,9 @@ const DoctorPortal = () => {
             }
         })
     }
+
+if(authenticate) navigate('/doctor')
+  
   return (
     <Container>
         <Typography>

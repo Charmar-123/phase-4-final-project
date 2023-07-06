@@ -1,6 +1,8 @@
 class DoctorsController < ApplicationController
 
-    skip_before_action :authorized_doctor, :authorized_admin, :authorized_patient, only: [:index]
+    skip_before_action :authorized_admin, :authorized_patient
+    skip_before_action :authorized_doctor, only: [:index]
+
 
 
     
@@ -12,6 +14,7 @@ class DoctorsController < ApplicationController
     
     def show
         doctor = current_doctor
+        byebug
         render json: doctor, status: :ok
     end
 end
