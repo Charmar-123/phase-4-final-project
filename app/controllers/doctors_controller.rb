@@ -1,6 +1,6 @@
 class DoctorsController < ApplicationController
 
-    skip_before_action :authorized_doctor, :authorized_admin, :authorized_patient, only: [:create, :index]
+    skip_before_action :authorized_doctor, :authorized_admin, :authorized_patient, only: [:index]
 
 
     

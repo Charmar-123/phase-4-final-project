@@ -1,7 +1,7 @@
 class SessionsController < ApplicationController
 
 
-    skip_before_action :authorized_doctor, :authorized_admin, :authorized_patient, only: [:create_doctor, :create_patient, :create_admin]
+    skip_before_action :authorized_doctor, :authorized_admin, :authorized_patient
 
     def create_doctor
         reset_session
@@ -43,17 +43,10 @@ class SessionsController < ApplicationController
 
     end
 
-    def destroy_doctor
-        session.delete :doctor_id
+    def destroy
+        reset_session
         head :no_content
     end
-    def destroy_patient
-        session.delete :patient_id
-        head :no_content
-    end
-    def destroy_admin
-        session.delete :admin_id
-        head :no_content
-    end
+
 
 end

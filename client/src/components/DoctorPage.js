@@ -1,7 +1,7 @@
 import React, { useContext } from 'react'
 import { DataGrid } from '@mui/x-data-grid';
 import UserContext from './UserContext';
-import { Button } from '@mui/material';
+import { Button, Typography } from '@mui/material';
 
 import { useNavigate } from 'react-router-dom'
 
@@ -10,6 +10,7 @@ const DoctorPage = () => {
   const navigate = useNavigate();
   const {setLoggedInDoctor, loggedInDoctor} = useContext(UserContext);
 
+  const {name, department} = loggedInDoctor
   const patients = loggedInDoctor.patients
 
 
@@ -52,6 +53,8 @@ const DoctorPage = () => {
   return (
     
     <div style={{ height: 400, width: '100%' }}>
+      <Typography>{name}</Typography>
+      <Typography>{department}</Typography>
       <Button onClick={handleLogOut}>Logout</Button>
     <DataGrid
       rows={rows}
