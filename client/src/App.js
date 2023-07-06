@@ -11,8 +11,14 @@ import PatientPortal from './components/PatientPortal';
 import DoctorPage from './components/DoctorPage';
 import PatientPage from './components/PatientPage';
 
+import UserContext from './components/UserContext';
+
 
 const App = () => {
+
+  const [user, setUser] = useState(null)
+
+  console.log(user);
 
   const [doctorsData, setDoctorsData] = useState([]);
 
@@ -25,26 +31,21 @@ const App = () => {
       .then(setDoctorsData)
   }, [])
 
-  console.log(doctorsData);
 
   return (
     <>
       <NavigationBar />
+      <UserContext.Provider value={[user, setUser]}>
+        <Routes>
 
-      <Routes>
-        <Route path='/' element={ <Doctors doctorsData={doctorsData} />}/>
-        <Route path='/doctor' element={ <DoctorPage loggedInDoctor={loggedInDoctor}/>}/>
-        <Route path='/doctor/login' element={<DoctorPortal setLoggedInDoctor={setLoggedInDoctor}/>}/>
-        <Route path='/patient' element={<PatientPage loggedInPatient={loggedInPatient}/>}/>
-        <Route path='/patient/login' element={<PatientPortal setLoggedInPatient={setLoggedInPatient}/>}/>
+          <Route path='/' element={<Doctors doctorsData={doctorsData} />} />
+          <Route path='/doctor' element={<DoctorPage loggedInDoctor={loggedInDoctor} />} />
+          <Route path='/doctor/login' element={<DoctorPortal setLoggedInDoctor={setLoggedInDoctor} />} />
+          <Route path='/patient' element={<PatientPage loggedInPatient={loggedInPatient} />} />
+          <Route path='/patient/login' element={<PatientPortal setLoggedInPatient={setLoggedInPatient} />} />
 
-      </Routes>
-      {/* <Home/> */}
-      {/* <DoctorPortal setLoggedInDoctor={setLoggedInDoctor}/> */}
-      {/* <DoctorPage loggedInDoctor={loggedInDoctor}/> */}
-      {/* <PatientPortal/> */}
-
-      {/* <Doctors doctorsData={doctorsData} /> */}
+        </Routes>
+      </UserContext.Provider>
     </>
 
   );

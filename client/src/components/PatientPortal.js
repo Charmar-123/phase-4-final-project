@@ -1,10 +1,16 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { useState } from 'react'
 
 import { Container, Typography, TextField, Button,} from '@mui/material';
 
 import { useNavigate } from 'react-router-dom'
+
+import UserContext from './UserContext';
+
+
 const PatientPortal = ({setLoggedInPatient}) => {
+
+    const [user, setUser] = useContext(UserContext);
 
     const navigate = useNavigate();
     const [loginData, setLoginData] = useState({
@@ -38,8 +44,9 @@ const PatientPortal = ({setLoggedInPatient}) => {
             console.log(user);
             if(res.ok){
                 res.json().then(user =>{
-                    console.log(user);
-                    setLoggedInPatient(user)
+                    // console.log(user);
+                    // setLoggedInPatient(user)
+                    setUser(user)
                     navigate('/patient')
                 })
             }
@@ -53,7 +60,7 @@ const PatientPortal = ({setLoggedInPatient}) => {
   return (
     <Container>
         <Typography>
-            Login
+            Patient Login
         </Typography>
         <form onSubmit={handleSubmit}>
         

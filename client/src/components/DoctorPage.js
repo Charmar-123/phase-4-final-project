@@ -3,7 +3,7 @@ import { DataGrid } from '@mui/x-data-grid';
 
 const DoctorPage = ({loggedInDoctor}) => {
 
-  console.log(loggedInDoctor.patients);
+  // console.log(loggedInDoctor.patients);
   
 
   const patients = loggedInDoctor.patients
