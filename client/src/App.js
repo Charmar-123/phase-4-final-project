@@ -16,10 +16,6 @@ import UserContext from './components/UserContext';
 
 const App = () => {
 
-  const [user, setUser] = useState(null)
-
-  console.log(user);
-
   const [doctorsData, setDoctorsData] = useState([]);
 
   const [loggedInDoctor, setLoggedInDoctor] = useState([]);

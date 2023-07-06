@@ -1,15 +1,13 @@
 class SessionsController < ApplicationController
 
     skip_before_action :authorized_doctor, only: [:create_doctor]
-    skip_before_action :authorized_patient, only: [:create_patient]
+    skip_before_action :authorized_patient,  only: [:create_patient]
 
     def create_doctor
         doctor = Doctor.find_by(email: params[:email])
-        # byebug
 
         if doctor&.authenticate(params[:password])
-            session[:user_id] = doctor.id
-            # byebug
+            session[:doctor_id] = doctor.id
             render json: doctor, serializer: SessionDoctorCreateSerializer
         else
             render json: {errors: "Invalid password or email"}, status: :unauthorized
@@ -18,24 +16,39 @@ class SessionsController < ApplicationController
     end
     def create_patient
         patient = Patient.find_by(email: params[:email])
-        # byebug
 
         if patient&.authenticate(params[:password])
-            session[:user_id] = patient.id
-            # byebug
+            session[:patient] = patient.id
             render json: patient, serializer: SessionPatientCreateSerializer
         else
             render json: {errors: "Invalid password or email"}, status: :unauthorized
         end
 
     end
+    def create_admin
+        admin = Admin.find_by(email: params[:email])
 
-    def destroy
-        session.delete user_id
+        if admin&.authenticate(params[:password])
+            session[:admin] = admin.id
+            # set up serializer
+            render json: admin, serializer: SessionPatientCreateSerializer
+        else
+            render json: {errors: "Invalid password or email"}, status: :unauthorized
+        end
+
+    end
+
+    def destroy_doctor
+        session.delete :doctor_id
         head :no_content
     end
-    # def destroy_patient
-    #     session.delete patient_id
-    #     head :no_content
-    # end
+    def destroy_patent
+        session.delete :patient_id
+        head :no_content
+    end
+    def destroy_admin
+        session.delete :admin_id
+        head :no_content
+    end
+
 end

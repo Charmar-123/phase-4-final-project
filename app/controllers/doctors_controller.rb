@@ -1,6 +1,7 @@
 class DoctorsController < ApplicationController
 
-    skip_before_action :authorized_doctor, only: [:create]
+    skip_before_action :authorized_doctor, only: [:create, :index]
+
 
     
     def index 

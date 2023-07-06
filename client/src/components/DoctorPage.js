@@ -28,6 +28,8 @@ const DoctorPage = () => {
       ];
       
       if (!patients) return <h1>Not logged in</h1>
+
+      
       const rows = patients.map(({id, name, age, history, email}) => {
         return (
           {id: id,name: name, age: age, history: history, email: email}
@@ -40,8 +42,8 @@ const DoctorPage = () => {
         })
         .then(res =>{
           if(res.ok){
-            setLoggedInDoctor(null)
-            navigate.push('/')
+            setLoggedInDoctor([])
+            navigate('/')
           }
         })
       }
