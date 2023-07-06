@@ -8,9 +8,9 @@ import { useNavigate } from 'react-router-dom'
 import UserContext from './UserContext';
 
 
-const PatientPortal = ({setLoggedInPatient}) => {
+const PatientPortal = () => {
 
-    const [user, setUser] = useContext(UserContext);
+    const {setLoggedInPatient} = useContext(UserContext);
 
     const navigate = useNavigate();
     const [loginData, setLoginData] = useState({
@@ -44,9 +44,7 @@ const PatientPortal = ({setLoggedInPatient}) => {
             console.log(user);
             if(res.ok){
                 res.json().then(user =>{
-                    // console.log(user);
-                    // setLoggedInPatient(user)
-                    setUser(user)
+                    setLoggedInPatient(user)
                     navigate('/patient')
                 })
             }

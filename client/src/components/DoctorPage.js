@@ -1,10 +1,14 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { DataGrid } from '@mui/x-data-grid';
+import UserContext from './UserContext';
+import { Button } from '@mui/material';
 
-const DoctorPage = ({loggedInDoctor}) => {
+import { useNavigate } from 'react-router-dom'
 
-  // console.log(loggedInDoctor.patients);
-  
+const DoctorPage = () => {
+
+  const navigate = useNavigate();
+  const {setLoggedInDoctor, loggedInDoctor} = useContext(UserContext);
 
   const patients = loggedInDoctor.patients
 
@@ -30,9 +34,23 @@ const DoctorPage = ({loggedInDoctor}) => {
         )
       })
 
+      const handleLogOut = () => {
+        fetch('/logout',{
+          method:'DELETE'
+        })
+        .then(res =>{
+          if(res.ok){
+            setLoggedInDoctor(null)
+            navigate.push('/')
+          }
+        })
+      }
+
  
   return (
+    
     <div style={{ height: 400, width: '100%' }}>
+      <Button onClick={handleLogOut}>Logout</Button>
     <DataGrid
       rows={rows}
       columns={columns}

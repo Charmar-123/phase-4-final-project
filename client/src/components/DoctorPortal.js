@@ -7,9 +7,9 @@ import { Container, Typography, TextField, Button,} from '@mui/material';
 import UserContext from './UserContext';
 
 
-const DoctorPortal = ({setLoggedInDoctor}) => {
+const DoctorPortal = () => {
 
-    const [user, setUser] = useContext(UserContext);
+    const {setLoggedInDoctor} = useContext(UserContext);
 
     const navigate = useNavigate();
 
@@ -43,8 +43,7 @@ const DoctorPortal = ({setLoggedInDoctor}) => {
         .then(res => {
             if(res.ok){
                 res.json().then(user =>{
-                    // setLoggedInDoctor(user)
-                    setUser(user)
+                    setLoggedInDoctor(user)
                     navigate('/doctor')
                 })
             }

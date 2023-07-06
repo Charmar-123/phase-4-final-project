@@ -35,14 +35,14 @@ const App = () => {
   return (
     <>
       <NavigationBar />
-      <UserContext.Provider value={[user, setUser]}>
+      <UserContext.Provider value={{loggedInDoctor, setLoggedInDoctor, loggedInPatient, setLoggedInPatient}}>
         <Routes>
 
           <Route path='/' element={<Doctors doctorsData={doctorsData} />} />
-          <Route path='/doctor' element={<DoctorPage loggedInDoctor={loggedInDoctor} />} />
-          <Route path='/doctor/login' element={<DoctorPortal setLoggedInDoctor={setLoggedInDoctor} />} />
-          <Route path='/patient' element={<PatientPage loggedInPatient={loggedInPatient} />} />
-          <Route path='/patient/login' element={<PatientPortal setLoggedInPatient={setLoggedInPatient} />} />
+          <Route path='/doctor' element={<DoctorPage/>} />
+          <Route path='/doctor/login' element={<DoctorPortal/>} />
+          <Route path='/patient' element={<PatientPage/>} />
+          <Route path='/patient/login' element={<PatientPortal/>} />
 
         </Routes>
       </UserContext.Provider>
