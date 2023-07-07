@@ -1,8 +1,6 @@
 class DoctorsController < ApplicationController
 
-    skip_before_action :authorized_admin, :authorized_patient
-    skip_before_action :authorized_doctor, only: [:index]
-
+    before_action :authorized_doctor, except: :index
 
 
     
@@ -16,4 +14,15 @@ class DoctorsController < ApplicationController
         doctor = current_doctor
         render json: doctor, status: :ok
     end
+
+    private
+
+    def current_doctor 
+        current_doctor = Doctor.find_by(id: session[:doctor_id])
+        current_doctor
+    end  
+    def authorized_doctor
+        render json: {errors: "Not Authorized"}, status: :unauthorized unless current_doctor
+    end 
+
 end

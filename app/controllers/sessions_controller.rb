@@ -1,8 +1,6 @@
 class SessionsController < ApplicationController
 
 
-    skip_before_action :authorized_doctor, :authorized_admin, :authorized_patient
-
     def create_doctor
         reset_session
         doctor = Doctor.find_by(email: params[:email])
@@ -15,6 +13,8 @@ class SessionsController < ApplicationController
         end
 
     end
+
+
     def create_patient
         reset_session
         patient = Patient.find_by(email: params[:email])
