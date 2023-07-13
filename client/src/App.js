@@ -32,12 +32,14 @@ const App = () => {
 }, [])
 
 
+const deleteAppointment = (id) => setPatientAppointments(current => current.filter(p => p.id !== id))
+
 
   return (
     <>
       <NavigationBar />
       <UserContext.Provider
-       value={{loggedInDoctor, setLoggedInDoctor, loggedInPatient, setLoggedInPatient, selectedAppointment, setSelectedAppointment, patientAppointments, setPatientAppointments}}>
+       value={{loggedInDoctor, setLoggedInDoctor, loggedInPatient, setLoggedInPatient, selectedAppointment, setSelectedAppointment, patientAppointments, setPatientAppointments, deleteAppointment}}>
         <Routes>
 
           <Route path='/' element={<Home/>} />
