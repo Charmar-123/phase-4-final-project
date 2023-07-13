@@ -9,15 +9,13 @@ import UserContext from './UserContext';
 
 
 const PatientPortal = () => {
-    const [authenticate, setAuthenticate] = useState(false);
 
     useEffect(() => {
-        fetch('/authorized/doctor')
+        fetch('/authorized/patient')
             .then(res => {
                 if (res.ok) {
-                    res.json().then(doctor => {
-                        setAuthenticate(true)
-                        navigate(`/doctors/${doctor.id}`)
+                    res.json().then(patient => {
+                        navigate(`/patients/${patient.id}`)
                     })
                 }
                 else {

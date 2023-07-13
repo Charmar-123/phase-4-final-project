@@ -9,14 +9,13 @@ import UserContext from './UserContext';
 
 const DoctorPortal = () => {
 
-    const [authenticate, setAuthenticate] = useState(false);
+
 
     useEffect(() => {
         fetch('/authorized/doctor')
             .then(res => {
                 if (res.ok) {
                     res.json().then(doctor => {
-                        setAuthenticate(true)
                         navigate(`/doctors/${doctor.id}`)
                     })
                 }
@@ -77,7 +76,7 @@ const DoctorPortal = () => {
             })
     }
 
-    if (authenticate) navigate('/doctor')
+
 
     return (
         <Container>

@@ -1,14 +1,8 @@
 class SessionPatientCreateSerializer < ActiveModel::Serializer
-  attributes :id, :reason_for_visit
+  attributes :id, :name, :email
   
 
-  belongs_to :doctor
+  has_many :appointments
 
-  # def appointments
-  #   byebug
-  #   object.appointments
-  # end
 
-  # has_many :doctors
-  # has_many :appointments
 end

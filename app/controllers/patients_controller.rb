@@ -3,7 +3,10 @@ class PatientsController < ApplicationController
     
     
     
-    
+    def show
+        doctor = current_patient
+        render json: doctor, status: :ok
+    end
     
     
     private
