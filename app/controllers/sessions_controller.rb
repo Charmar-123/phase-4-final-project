@@ -21,12 +21,15 @@ class SessionsController < ApplicationController
 
         if patient&.authenticate(params[:password])
             session[:patient_id] = patient.id
-            render json: patient, serializer: SessionPatientCreateSerializer
+            render json: patient, include: ['appointments.doctor']
+
         else
             render json: {errors: "Invalid password or email"}, status: :unauthorized
         end
-
+        # (include: {albums: {include: :songs}})
     end
+
+   
 
     def create_admin
         reset_session

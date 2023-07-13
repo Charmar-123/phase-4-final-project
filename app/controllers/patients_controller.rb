@@ -6,14 +6,6 @@ class PatientsController < ApplicationController
     
     
     
-    
-    
-    
-    
-    
-    
-    
-    
     private
     def current_patient
          patient = Patient.find_by(id: session[:patient_id])

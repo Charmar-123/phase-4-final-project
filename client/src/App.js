@@ -21,11 +21,14 @@ const App = () => {
   const [loggedInDoctor, setLoggedInDoctor] = useState([]);
   const [loggedInPatient, setLoggedInPatient] = useState([]);
 
-  useEffect(() => {
+
+
+  useEffect(()=> {
     fetch('/doctors')
-      .then(res => res.json())
-      .then(setDoctorsData)
-  }, [])
+    .then(res=> res.json())
+    .then(data => setDoctorsData(data))
+}, [])
+
 
 
   return (
@@ -34,11 +37,12 @@ const App = () => {
       <UserContext.Provider value={{loggedInDoctor, setLoggedInDoctor, loggedInPatient, setLoggedInPatient}}>
         <Routes>
 
-          <Route path='/' element={<Doctors doctorsData={doctorsData} />} />
-          <Route path='/doctor' element={<DoctorPage/>} />
-          <Route path='/doctor/login' element={<DoctorPortal/>} />
-          <Route path='/patient' element={<PatientPage/>} />
-          <Route path='/patient/login' element={<PatientPortal/>} />
+          <Route path='/' element={<Home/>} />
+          <Route path='/doctors' element={<Doctors doctorsData={doctorsData} />} />
+          <Route path='/doctors/:id' element={<DoctorPage />}/>
+          <Route path='/doctors/login' element={<DoctorPortal/>} />
+          <Route path='/patients/:id' element={<PatientPage loggedInPatient={loggedInPatient}/>} />
+          <Route path='/patients/login' element={<PatientPortal/>} />
 
         </Routes>
       </UserContext.Provider>

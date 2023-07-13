@@ -1,5 +1,5 @@
 class AdminsController < ApplicationController
-    before_action :authorized_admin,
+    before_action :authorized_admin
 
 
     private

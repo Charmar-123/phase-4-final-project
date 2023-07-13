@@ -5,7 +5,9 @@ class DoctorsController < ApplicationController
 
     
     def index 
-        render json: Doctor.all, status: :ok
+        doctors = Doctor.all
+        render json: doctors, status: :ok
+
     end
 
 

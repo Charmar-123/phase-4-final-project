@@ -1,5 +1,5 @@
 import React, { useContext } from 'react'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 
 import { Container, Typography, TextField, Button,} from '@mui/material';
 
@@ -9,7 +9,26 @@ import UserContext from './UserContext';
 
 
 const PatientPortal = () => {
+    const [authenticate, setAuthenticate] = useState(false);
 
+    useEffect(() => {
+        fetch('/authorized/doctor')
+            .then(res => {
+                if (res.ok) {
+                    res.json().then(doctor => {
+                        setAuthenticate(true)
+                        navigate(`/doctors/${doctor.id}`)
+                    })
+                }
+                else {
+                    res.json().then(json => {
+                        console.log(json.errors);
+                        setErrors(json.errors)
+                    })
+                }
+            })
+
+    }, [])
     const {setLoggedInPatient} = useContext(UserContext);
 
     const navigate = useNavigate();
@@ -41,11 +60,12 @@ const PatientPortal = () => {
             body:JSON.stringify(user)
         })
         .then(res => {
-            console.log(user);
+            // console.log(user);
             if(res.ok){
-                res.json().then(user =>{
-                    setLoggedInPatient(user)
-                    navigate('/patient')
+                res.json().then(patient =>{
+                    console.log(patient);
+                    setLoggedInPatient(patient)
+                    navigate(`/patients/${patient.id}`)
                 })
             }
             else {

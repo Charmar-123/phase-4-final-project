@@ -1,8 +1,11 @@
+import { Typography } from '@mui/material'
 import React from 'react'
 
-const PatientPage = () => {
+const PatientPage = ({loggedInPatient}) => {
+
+  const {id, name, doctors, appointments} = loggedInPatient
   return (
-    <div>PatientPage</div>
+    <Typography>Welcome </Typography>
   )
 }
 

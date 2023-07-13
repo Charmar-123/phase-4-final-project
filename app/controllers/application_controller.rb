@@ -4,25 +4,6 @@ class ApplicationController < ActionController::API
   rescue_from ActiveRecord::RecordInvalid, with: :render_unprocessable_entity
   rescue_from ActiveRecord::RecordNotFound, with: :render_not_found
 
-# Change variable for patient admin and doctor
-    # before_action
-   
-   
-
-   
-
-    # current_user and authorized_user
-
-    # change patient to be current patient in patient controller
-    # add a skip_before_action in session controller except for create and for patient, doctors, and admin
-   
-
-  
-    
- 
-
-
-
 
   private 
   def render_unprocessable_entity(invalid)

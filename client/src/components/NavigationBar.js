@@ -19,10 +19,10 @@ const NavigationBar = () => {
                     <Box sx={{ display: { xs: 'none', sm: 'block',  flexGrow: 1  } }} marginLeft={3}>
                         <Button as={Link} to={'/'} sx={{ color: '#fff' }}>Home</Button>
                         <Button as={Link} to={'/doctors'} sx={{ color: '#fff' }}>Our Doctors</Button>
-                        <Button as={Link} sx={{ color: '#fff' }}>About Us</Button>
-                        <Button as={Link} to={'/doctor/login'} sx={{ color: '#fff' }}>Doctor Portal</Button>
+                        <Button as={Link} to={'/patients/login'} sx={{ color: '#fff' }}>Patient Portal</Button>
+                        <Button as={Link} to={'/doctors/login'} sx={{ color: '#fff' }}>Doctor Portal</Button>
                         <Button as={Link} sx={{ color: '#fff' }}>Admin Portal</Button>
-                        <Button as={Link} to={'/patient/login'} sx={{ color: '#fff' }}>Patient Portal</Button>
+         
                     </Box>
                 </Toolbar>
             </AppBar>
