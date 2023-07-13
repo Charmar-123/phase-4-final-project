@@ -33,12 +33,16 @@ const PatientPage = () => {
   }
 
 
-  const handleViewAppointment = ({id}) => {
+  const handleViewAppointment = (id) => {
     fetch(`/appointments/${id}`)
     .then(res => res.json())
     .then(data => {
       console.log(data)
     })
+  }
+
+  const handleBookAppontiment = () => {
+    
   }
 
 
@@ -51,11 +55,16 @@ const PatientPage = () => {
       color="error" 
       onClick={handleLogOut}
       >LOGOUT</Button>
+      <Button 
+      variant='contained' 
+      color="error" 
+      onClick={handleBookAppontiment}
+      >Book Appointment</Button>
       <TableContainer component={Paper}>
         <Table>
           <TableHead>
             <TableRow>
-              <TableCell>Name</TableCell>
+              <TableCell>Reason</TableCell>
               <TableCell>Email</TableCell>
               <TableCell>View Appointment</TableCell>
             </TableRow>
@@ -68,7 +77,7 @@ const PatientPage = () => {
                 <TableCell>{date}</TableCell>
                 <TableCell>
                   <Button variant="outlined"
-                    onClick={handleViewAppointment(id)}
+                    onClick={() => handleViewAppointment(id)}
                   >View Appointment</Button>
                 </TableCell>
               </TableRow>
