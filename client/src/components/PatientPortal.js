@@ -27,7 +27,7 @@ const PatientPortal = () => {
             })
 
     }, [])
-    const {setLoggedInPatient} = useContext(UserContext);
+    const {setLoggedInPatient, setPatientAppointments} = useContext(UserContext);
 
     const navigate = useNavigate();
     const [loginData, setLoginData] = useState({
@@ -61,7 +61,8 @@ const PatientPortal = () => {
             // console.log(user);
             if(res.ok){
                 res.json().then(patient =>{
-                    // console.log(patient);
+                    console.log(patient);
+                    setPatientAppointments(patient.appointments)
                     setLoggedInPatient(patient)
                     navigate(`/patients/${patient.id}`)
                 })

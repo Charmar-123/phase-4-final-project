@@ -9,20 +9,17 @@ import { useNavigate } from 'react-router-dom'
 
 const PatientPage = () => {
 
+  
   const [viewAppFrom, setViewAppForm] = useState(false);
 
 
   const navigate = useNavigate();
 
 
-  const { loggedInPatient, setLoggedInPatient, setAppointment } = useContext(UserContext);
+  const { loggedInPatient, setLoggedInPatient, setSelectedAppointment, patientAppointments } = useContext(UserContext);
   const {name} = loggedInPatient
-
-  let appointments = [];
-  if (Array.isArray(loggedInPatient.appointments)) {
-    appointments = loggedInPatient.appointments
-  }
-
+  // setAppointments(loggedInPatient.appointments)
+  console.log(patientAppointments);
 
   const handleLogOut = () => {
     fetch('/logout', {
@@ -42,7 +39,7 @@ const PatientPage = () => {
     .then(res => res.json())
     .then(appointment => {
       console.log(appointment)
-      setAppointment(appointment)
+      setSelectedAppointment(appointment)
       navigate(`/appointments/${appointment.id}`)
     })
   }
@@ -75,7 +72,7 @@ const PatientPage = () => {
             </TableRow>
           </TableHead>
           <TableBody>
-            {appointments.map(({ id, reason_for_visit, time, date }) => (
+            {patientAppointments.map(({ id, reason_for_visit, time, date }) => (
               <TableRow key={id}>
                 <TableCell>{reason_for_visit}</TableCell>
                 <TableCell>{time}</TableCell>

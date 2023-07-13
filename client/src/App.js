@@ -21,7 +21,8 @@ const App = () => {
 
   const [loggedInDoctor, setLoggedInDoctor] = useState([]);
   const [loggedInPatient, setLoggedInPatient] = useState([]);
-  const [appointment, setAppointment] = useState([])
+  const [patientAppointments, setPatientAppointments] = useState([]);
+  const [selectedAppointment, setSelectedAppointment] = useState([])
 
 
   useEffect(()=> {
@@ -35,7 +36,8 @@ const App = () => {
   return (
     <>
       <NavigationBar />
-      <UserContext.Provider value={{loggedInDoctor, setLoggedInDoctor, loggedInPatient, setLoggedInPatient, appointment, setAppointment}}>
+      <UserContext.Provider
+       value={{loggedInDoctor, setLoggedInDoctor, loggedInPatient, setLoggedInPatient, selectedAppointment, setSelectedAppointment, patientAppointments, setPatientAppointments}}>
         <Routes>
 
           <Route path='/' element={<Home/>} />
