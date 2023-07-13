@@ -35,8 +35,11 @@ const DoctorPage = () => {
     <>
       <Typography>Welcome {name}</Typography>
       <Typography>{department}</Typography>
-      <Button style={{alignSelf:'flex-end'}}>LOGOUT</Button>
-
+      <Button 
+      variant='contained' 
+      color="error" 
+      onClick={handleLogOut}
+      >LOGOUT</Button>
       <TableContainer component={Paper}>
         <Table>
           <TableHead>

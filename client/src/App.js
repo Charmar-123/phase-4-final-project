@@ -3,7 +3,6 @@ import './App.css';
 import { useEffect, useState } from 'react';
 import { Route, Routes } from 'react-router-dom';
 import Doctors from './components/Doctors';
-import DoctorCard from './components/DoctorCard';
 import NavigationBar from './components/NavigationBar';
 import Home from './components/Home';
 import DoctorPortal from './components/DoctorPortal';
@@ -11,7 +10,9 @@ import PatientPortal from './components/PatientPortal';
 import DoctorPage from './components/DoctorPage';
 import PatientPage from './components/PatientPage';
 
+
 import UserContext from './components/UserContext';
+import AppointmentsPage from './components/AppointmentsPage';
 
 
 const App = () => {
@@ -20,7 +21,6 @@ const App = () => {
 
   const [loggedInDoctor, setLoggedInDoctor] = useState([]);
   const [loggedInPatient, setLoggedInPatient] = useState([]);
-
 
 
   useEffect(()=> {
@@ -43,6 +43,7 @@ const App = () => {
           <Route path='/doctors/login' element={<DoctorPortal/>} />
           <Route path='/patients/:id' element={<PatientPage/>} />
           <Route path='/patients/login' element={<PatientPortal/>} />
+          <Route path='/appointments/:id' element={<AppointmentsPage/>} />
 
         </Routes>
       </UserContext.Provider>

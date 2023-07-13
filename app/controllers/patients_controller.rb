@@ -8,15 +8,6 @@ class PatientsController < ApplicationController
         render json: doctor, status: :ok
     end
     
-    
-    private
-    def current_patient
-         patient = Patient.find_by(id: session[:patient_id])
-         patient
-     end  
- 
-     def authorized_patient
-         render json: {errors: "Not Authorized"}, status: :unauthorized unless current_patient
-     end 
+
  
 end

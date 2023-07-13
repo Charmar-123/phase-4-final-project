@@ -52,7 +52,7 @@ const PatientPortal = () => {
 
         }
 
-        fetch('/patient/login', {
+        fetch('/patients/login', {
             method: 'POST',
             headers:{'Content-Type':'application/json'},
             body:JSON.stringify(user)

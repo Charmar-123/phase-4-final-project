@@ -12,30 +12,13 @@ const PatientPage = () => {
 
 
   const { loggedInPatient, setLoggedInPatient } = useContext(UserContext);
-  const { id, name, email } = loggedInPatient
+  const {name} = loggedInPatient
 
   let appointments = [];
   if (Array.isArray(loggedInPatient.appointments)) {
     appointments = loggedInPatient.appointments
   }
 
-  const columns = [
-    { field: 'date', headerName: 'Date', width: 130 },
-    {
-      field: 'time',
-      headerName: 'Time',
-      type: 'number',
-      width: 130,
-    },
-    { field: 'reason_for_visit', headerName: 'Reason for visit', width: 300 },
-
-  ];
-
-  // const rows = appointments.map(({id, reason_for_visit, time, date, doctor}) => {
-  //   return (
-  //     {id: id, reason_for_visit: reason_for_visit ,time: time, date: date}
-  //   )
-  // })
 
   const handleLogOut = () => {
     fetch('/logout', {
@@ -48,11 +31,26 @@ const PatientPage = () => {
         }
       })
   }
+
+
+  const handleViewAppointment = ({id}) => {
+    fetch(`/appointments/${id}`)
+    .then(res => res.json())
+    .then(data => {
+      console.log(data)
+    })
+  }
+
+
   return (
 
     <>
       <Typography>Welcome {name}</Typography>
-      <Button style={{ alignSelf: 'flex-end' }}>LOGOUT</Button>
+      <Button 
+      variant='contained' 
+      color="error" 
+      onClick={handleLogOut}
+      >LOGOUT</Button>
       <TableContainer component={Paper}>
         <Table>
           <TableHead>
@@ -70,8 +68,8 @@ const PatientPage = () => {
                 <TableCell>{date}</TableCell>
                 <TableCell>
                   <Button variant="outlined"
-
-                  >Button</Button>
+                    onClick={handleViewAppointment(id)}
+                  >View Appointment</Button>
                 </TableCell>
               </TableRow>
             ))}

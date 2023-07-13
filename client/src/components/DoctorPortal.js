@@ -55,7 +55,7 @@ const DoctorPortal = () => {
 
         }
 
-        fetch('/doctor/login', {
+        fetch('/doctors/login', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(user)
