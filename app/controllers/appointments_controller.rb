@@ -13,7 +13,6 @@ class AppointmentsController < ApplicationController
 
 
     def show
-        # appointment = current_appointment
         appointment = Appointment.find_by(id: params[:id])
         render json: appointment, status: :ok
     end
@@ -21,7 +20,7 @@ class AppointmentsController < ApplicationController
 private 
 
     def appointment_params
-        params.permit(:date, :time,: :reason_for_visit, :doctor_id, :patient_id)
+        params.permit(:date, :time, :reason_for_visit, :doctor_id, :patient_id)
     end
 
 end

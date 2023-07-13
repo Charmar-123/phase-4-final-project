@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+import React, { useContext, useState } from 'react'
 import UserContext from './UserContext';
 
 import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Button, Typography } from '@mui/material';
@@ -8,10 +8,14 @@ import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper
 import { useNavigate } from 'react-router-dom'
 
 const PatientPage = () => {
+
+  const [viewAppFrom, setViewAppForm] = useState(false);
+
+
   const navigate = useNavigate();
 
 
-  const { loggedInPatient, setLoggedInPatient } = useContext(UserContext);
+  const { loggedInPatient, setLoggedInPatient, setAppointment } = useContext(UserContext);
   const {name} = loggedInPatient
 
   let appointments = [];
@@ -36,19 +40,20 @@ const PatientPage = () => {
   const handleViewAppointment = (id) => {
     fetch(`/appointments/${id}`)
     .then(res => res.json())
-    .then(data => {
-      console.log(data)
+    .then(appointment => {
+      console.log(appointment)
+      setAppointment(appointment)
+      navigate(`/appointments/${appointment.id}`)
     })
   }
 
-  const handleBookAppontiment = () => {
-    
-  }
 
 
   return (
 
     <>
+
+
       <Typography>Welcome {name}</Typography>
       <Button 
       variant='contained' 
@@ -58,7 +63,7 @@ const PatientPage = () => {
       <Button 
       variant='contained' 
       color="error" 
-      onClick={handleBookAppontiment}
+      onClick={() => setViewAppForm(true)}
       >Book Appointment</Button>
       <TableContainer component={Paper}>
         <Table>
