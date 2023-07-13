@@ -3,13 +3,18 @@ import UserContext from './UserContext';
 
 import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Button, Typography } from '@mui/material';
 
+// import { DemoContainer } from '@mui/x-date-pickers/internals/demo';
+// import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
+// import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
+// import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 
 
 import { useNavigate } from 'react-router-dom'
 
+
 const PatientPage = () => {
 
-  
+
   const [viewAppFrom, setViewAppForm] = useState(false);
 
 
@@ -17,7 +22,7 @@ const PatientPage = () => {
 
 
   const { loggedInPatient, setLoggedInPatient, setSelectedAppointment, patientAppointments } = useContext(UserContext);
-  const {name} = loggedInPatient
+  const { name } = loggedInPatient
   // setAppointments(loggedInPatient.appointments)
   console.log(patientAppointments);
 
@@ -36,12 +41,12 @@ const PatientPage = () => {
 
   const handleViewAppointment = (id) => {
     fetch(`/appointments/${id}`)
-    .then(res => res.json())
-    .then(appointment => {
-      console.log(appointment)
-      setSelectedAppointment(appointment)
-      navigate(`/appointments/${appointment.id}`)
-    })
+      .then(res => res.json())
+      .then(appointment => {
+        console.log(appointment)
+        setSelectedAppointment(appointment)
+        navigate(`/appointments/${appointment.id}`)
+      })
   }
 
 
@@ -49,18 +54,26 @@ const PatientPage = () => {
   return (
 
     <>
+      {/* <LocalizationProvider dateAdapter={AdapterDayjs}>
+        <DemoContainer components={['DatePicker']}>
+          <DatePicker
+          // value={value} 
+          // onChange={(newValue) => setValue(newValue)} 
+          />
+        </DemoContainer>
+      </LocalizationProvider> */}
 
 
       <Typography>Welcome {name}</Typography>
-      <Button 
-      variant='contained' 
-      color="error" 
-      onClick={handleLogOut}
+      <Button
+        variant='contained'
+        color="error"
+        onClick={handleLogOut}
       >LOGOUT</Button>
-      <Button 
-      variant='contained' 
-      color="error" 
-      onClick={() => setViewAppForm(true)}
+      <Button
+        variant='contained'
+        color="error"
+        onClick={() => setViewAppForm(true)}
       >Book Appointment</Button>
       <TableContainer component={Paper}>
         <Table>
