@@ -1,9 +1,9 @@
 import React, { useContext } from 'react'
 import { DataGrid } from '@mui/x-data-grid';
 import UserContext from './UserContext';
-import { Button, Typography } from '@mui/material';
-
 import { useNavigate } from 'react-router-dom'
+
+import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Button, Typography } from '@mui/material';
 
 const DoctorPage = () => {
 
@@ -16,26 +16,6 @@ const DoctorPage = () => {
     patients = loggedInDoctor.patients
   }
 
-
-
-  const columns = [
-
-    { field: 'name', headerName: 'Name', width: 130 },
-    {
-      field: 'age',
-      headerName: 'Age',
-      type: 'number',
-      width: 90,
-    },
-    { field: 'history', headerName: 'History', width: 300 },
-    { field: 'email', headerName: 'Email', width: 300 },
-  ];
-
-  const rows = patients.map(({ id, name, age, history, email }) => {
-    return (
-      { id: id, name: name, age: age, history: history, email: email }
-    )
-  })
 
   const handleLogOut = () => {
     fetch('/logout', {
@@ -52,22 +32,41 @@ const DoctorPage = () => {
 
   return (
 
-    <div style={{ height: 400, width: '100%' }}>
-      <Typography>{name}</Typography>
+    <>
+      <Typography>Welcome {name}</Typography>
       <Typography>{department}</Typography>
-      <Button onClick={handleLogOut}>Logout</Button>
-      <DataGrid
-        rows={rows}
-        columns={columns}
-        initialState={{
-          pagination: {
-            paginationModel: { page: 0, pageSize: 5 },
-          },
-        }}
-        pageSizeOptions={[5, 10]}
-      // checkboxSelection
-      />
-    </div>
+      <Button style={{alignSelf:'flex-end'}}>LOGOUT</Button>
+
+      <TableContainer component={Paper}>
+        <Table>
+          <TableHead>
+            <TableRow>
+              <TableCell>Name</TableCell>
+              <TableCell>Age</TableCell>
+              <TableCell>History</TableCell>
+              <TableCell>Email</TableCell>
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {patients.map(({ id, name, age, history, email }) => (
+              <TableRow key={id}>
+                <TableCell>{name}</TableCell>
+                <TableCell>{age}</TableCell>
+                <TableCell>{history}</TableCell>
+                <TableCell>{email}</TableCell>
+                <TableCell>
+                  <Button variant="outlined"
+
+                  >Button</Button>
+                </TableCell>
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
+      </TableContainer>
+
+    </>
+
   )
 }
 
