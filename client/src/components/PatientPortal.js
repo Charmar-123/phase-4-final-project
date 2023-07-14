@@ -9,7 +9,20 @@ import UserContext from './UserContext';
 
 const PatientPortal = () => {
 
+
+    const navigate = useNavigate();
     const {setLoggedInPatient, setPatientAppointments} = useContext(UserContext);
+
+
+
+    const [loginData, setLoginData] = useState({
+        email: '',
+        password: ''
+    });
+
+    const [errors, setErrors] = useState([]);
+
+    
 
     useEffect(() => {
         fetch('/authorized/patient')
@@ -31,13 +44,7 @@ const PatientPortal = () => {
     }, [])
    
 
-    const navigate = useNavigate();
-    const [loginData, setLoginData] = useState({
-        email: '',
-        password: ''
-    });
-
-    const [errors, setErrors] = useState([]);
+   
 
     const handleChange = (e) => {
 
@@ -60,7 +67,6 @@ const PatientPortal = () => {
             body:JSON.stringify(user)
         })
         .then(res => {
-            // console.log(user);
             if(res.ok){
                 res.json().then(patient =>{
                     console.log(patient);

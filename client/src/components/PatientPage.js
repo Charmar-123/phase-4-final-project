@@ -43,6 +43,7 @@ const PatientPage = () => {
       })
   }
 
+// fetch nested data with doctors or do seperate fetches ??
 
   const handleViewAppointment = (id) => {
     fetch(`/appointments/${id}`)
