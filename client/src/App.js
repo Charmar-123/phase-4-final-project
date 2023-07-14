@@ -39,7 +39,7 @@ const deleteAppointment = (id) => setPatientAppointments(current => current.filt
     <>
       <NavigationBar />
       <UserContext.Provider
-       value={{loggedInDoctor, setLoggedInDoctor, loggedInPatient, setLoggedInPatient, selectedAppointment, setSelectedAppointment, patientAppointments, setPatientAppointments, deleteAppointment}}>
+       value={{doctorsData, loggedInDoctor, setLoggedInDoctor, loggedInPatient, setLoggedInPatient, selectedAppointment, setSelectedAppointment, patientAppointments, setPatientAppointments, deleteAppointment}}>
         <Routes>
 
           <Route path='/' element={<Home/>} />

@@ -1,7 +1,7 @@
 import React, { useContext, useState } from 'react'
 import UserContext from './UserContext';
 
-import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Button, Typography } from '@mui/material';
+import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Button, Typography, TextField } from '@mui/material';
 
 import { useNavigate } from 'react-router-dom'
 
@@ -19,13 +19,18 @@ import { TimePicker } from '@mui/x-date-pickers/TimePicker';
 const PatientPage = () => {
   const [viewAppFrom, setViewAppForm] = useState(false);
   const navigate = useNavigate();
-  const { loggedInPatient, setLoggedInPatient, setSelectedAppointment, patientAppointments } = useContext(UserContext);
-  const { name } = loggedInPatient
+  const { doctorsData, loggedInPatient, setLoggedInPatient, setSelectedAppointment, patientAppointments } = useContext(UserContext);
+  const { name, id } = loggedInPatient
 
+  console.log(loggedInPatient);
 
   const [appointmentDate, setAppointmentDate] = useState('');
-  const [appointmentTime, setAppointmentTime] = useState(dayjs())
-  const [appointmentDoctor, setAppointmentDoctor] = useState(null)
+  const [appointmentTime, setAppointmentTime] = useState(dayjs());
+  const [appointmentDoctor, setAppointmentDoctor] = useState('');
+  const [appointmentRFV, setAppointmentRFV] = useState('');
+
+
+
 
   const handleLogOut = () => {
     fetch('/logout', {
@@ -50,6 +55,20 @@ const PatientPage = () => {
       })
   }
 
+  const handleSubmitAppointment = (e) => {
+    e.preventDefault();
+    console.log(
+      {
+        date: appointmentDate,
+        time: appointmentTime,
+        reason_for_visit: appointmentRFV,
+        doctor_id: appointmentDoctor,
+        patient_id: id
+      }
+
+    );
+  }
+
 
 
   return (
@@ -57,43 +76,58 @@ const PatientPage = () => {
     <>
       <Typography>HIII</Typography>
 
-      <LocalizationProvider dateAdapter={AdapterDayjs}>
-        <DatePicker
-          disablePast
-          format="DD-MM-YYYY"
-          value={appointmentDate}
-          onChange={(newValue) => {
-            console.log(dayjs(newValue).format('YYYY-MM-DD'));
-            setAppointmentDate(dayjs(newValue).format('YYYY-MM-DD'))
-          }}
-        />
-        <TimePicker
-          label="Select Appointment Time"
-          views={['hours']}
-          minTime={dayjs().set('hour', 8)}
-          maxTime={dayjs().set('hour', 17)}
-          value={appointmentTime}
-          onChange={(newValue) => {
-            console.log(dayjs(newValue).format('h A'));
-            setAppointmentTime(dayjs(newValue).format('h A'))
-          }}
-        />
-      </LocalizationProvider>
+      <form onSubmit={handleSubmitAppointment}>
 
-      <Box sx={{width: 100 }}>
-        <FormControl fullWidth>
-          <InputLabel >Doctor</InputLabel>
-          <Select
-            value={appointmentDoctor}
-            label="Doctor"
-            onChange={(value) => setAppointmentDoctor(value)}
-          >
-            <MenuItem value={10}>Ten</MenuItem>
-            <MenuItem value={20}>Twenty</MenuItem>
-            <MenuItem value={30}>Thirty</MenuItem>
-          </Select>
-        </FormControl>
-      </Box>
+        <LocalizationProvider dateAdapter={AdapterDayjs}>
+          <DatePicker
+            disablePast
+            format="DD-MM-YYYY"
+            value={appointmentDate}
+            onChange={(newValue) => {
+              console.log(dayjs(newValue).format('YYYY-MM-DD'));
+              setAppointmentDate(dayjs(newValue).format('YYYY-MM-DD'))
+            }}
+          />
+          <TimePicker
+            label="Select Appointment Time"
+            views={['hours']}
+            minTime={dayjs().set('hour', 8)}
+            maxTime={dayjs().set('hour', 17)}
+            value={appointmentTime}
+            onChange={(newValue) => {
+              console.log(dayjs(newValue).format('h A'));
+              setAppointmentTime(dayjs(newValue).format('h A'))
+            }}
+          />
+        </LocalizationProvider>
+
+        <Box sx={{ width: 200 }}>
+          <FormControl fullWidth>
+            <InputLabel>Doctor</InputLabel>
+            <Select
+              value={appointmentDoctor}
+              label="Doctor"
+              onChange={(e) => {
+                console.log(e.target);
+                setAppointmentDoctor(e.target.value)
+              }}
+            >
+              {doctorsData.map(({ id, name }) => <MenuItem key={id} value={id}>{name}</MenuItem>)}
+
+            </Select>
+          </FormControl>
+        </Box>
+
+    
+
+        <TextField onChange={(e) => setAppointmentRFV(e.target.value)} label="Reason for visit" variant="outlined" />
+        <Button
+          variant='contained'
+          color="error"
+          type='submit'
+        >SUBMIT</Button>
+      </form>
+
 
 
 
