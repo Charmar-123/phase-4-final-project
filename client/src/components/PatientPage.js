@@ -5,13 +5,14 @@ import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper
 
 import { useNavigate } from 'react-router-dom'
 
-
+import { Box, InputLabel, MenuItem, FormControl, Select } from '@mui/material'
 
 
 import dayjs from 'dayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
+import { TimePicker } from '@mui/x-date-pickers/TimePicker';
 
 
 
@@ -22,7 +23,9 @@ const PatientPage = () => {
   const { name } = loggedInPatient
 
 
-  const [value, setValue] = React.useState(dayjs());
+  const [appointmentDate, setAppointmentDate] = useState('');
+  const [appointmentTime, setAppointmentTime] = useState(dayjs())
+  const [appointmentDoctor, setAppointmentDoctor] = useState(null)
 
   const handleLogOut = () => {
     fetch('/logout', {
@@ -58,13 +61,48 @@ const PatientPage = () => {
         <DatePicker
           disablePast
           format="DD-MM-YYYY"
-          value={value}
+          value={appointmentDate}
           onChange={(newValue) => {
             console.log(dayjs(newValue).format('YYYY-MM-DD'));
-            setValue(dayjs(newValue).format('YYYY-MM-DD'))}}
+            setAppointmentDate(dayjs(newValue).format('YYYY-MM-DD'))
+          }}
         />
+        <TimePicker
+          label="Select Appointment Time"
+          views={['hours']}
+          minTime={dayjs().set('hour', 8)}
+          maxTime={dayjs().set('hour', 17)}
+          value={appointmentTime}
+          onChange={(newValue) => {
+            console.log(dayjs(newValue).format('h A'));
+            setAppointmentTime(dayjs(newValue).format('h A'))
+          }}
+        />
+      </LocalizationProvider>
 
-    </LocalizationProvider>
+      <Box sx={{width: 100 }}>
+        <FormControl fullWidth>
+          <InputLabel >Doctor</InputLabel>
+          <Select
+            value={appointmentDoctor}
+            label="Doctor"
+            onChange={(value) => setAppointmentDoctor(value)}
+          >
+            <MenuItem value={10}>Ten</MenuItem>
+            <MenuItem value={20}>Twenty</MenuItem>
+            <MenuItem value={30}>Thirty</MenuItem>
+          </Select>
+        </FormControl>
+      </Box>
+
+
+
+
+
+
+
+
+
 
 
       <Typography>Welcome {name}</Typography>
@@ -83,7 +121,8 @@ const PatientPage = () => {
           <TableHead>
             <TableRow>
               <TableCell>Reason</TableCell>
-              <TableCell>Email</TableCell>
+              <TableCell>Time</TableCell>
+              <TableCell>Date</TableCell>
               <TableCell>View Appointment</TableCell>
             </TableRow>
           </TableHead>
