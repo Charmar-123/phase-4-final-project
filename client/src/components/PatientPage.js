@@ -17,9 +17,11 @@ import { TimePicker } from '@mui/x-date-pickers/TimePicker';
 
 
 const PatientPage = () => {
+
+  const [errors, setErrors] = useState('')
   const [viewAppFrom, setViewAppForm] = useState(false);
   const navigate = useNavigate();
-  const { doctorsData, loggedInPatient, setLoggedInPatient, setSelectedAppointment, patientAppointments } = useContext(UserContext);
+  const { doctorsData, loggedInPatient, setLoggedInPatient, setSelectedAppointment, patientAppointments, addAppointment } = useContext(UserContext);
   const { name, id } = loggedInPatient
 
 
@@ -44,7 +46,6 @@ const PatientPage = () => {
   }
 
 // fetch nested data with doctors or do seperate fetches ??
-
   const handleViewAppointment = (id) => {
     fetch(`/appointments/${id}`)
       .then(res => res.json())
@@ -57,6 +58,27 @@ const PatientPage = () => {
 
   const handleSubmitAppointment = (e) => {
     e.preventDefault();
+    fetch('/appointments', {
+      method: 'POST',
+      headers: {'Content-Type' : 'application/json'},
+      body:JSON.stringify({
+        date: appointmentDate,
+        time: appointmentTime,
+        reason_for_visit: appointmentRFV,
+        doctor_id: appointmentDoctor,
+        patient_id: id
+      })
+    })
+    .then(res => {
+      if (res.ok){
+        res.json().then(addAppointment)
+      } else {
+        res.json().then(json => {
+          console.log(json.errors);
+          setErrors(json.errors)
+      })
+      }
+    })
     console.log(
       {
         date: appointmentDate,

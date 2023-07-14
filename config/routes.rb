@@ -6,7 +6,6 @@ Rails.application.routes.draw do
   resources :doctors
 
   # Custom routes
-  get '/doctors', to: 'doctors#index'
   post '/doctors/login', to: 'sessions#create_doctor'
   post '/patients/login', to: 'sessions#create_patient'
   delete '/logout', to: 'sessions#destroy'
