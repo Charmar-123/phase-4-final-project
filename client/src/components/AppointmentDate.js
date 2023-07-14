@@ -1,8 +1,7 @@
 import * as React from 'react';
 import dayjs from 'dayjs';
-import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
-import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
-import { DatePicker } from '@mui/x-date-pickers/DatePicker';
+import { LocalizationProvider, AdapterDayjs, DatePicker } from '@mui/x-date-pickers';
+
 
 const AppointmentDate = () => {
   const [value, setValue] = React.useState(dayjs());

@@ -1,5 +1,4 @@
 import React, { useContext } from 'react'
-import { DataGrid } from '@mui/x-data-grid';
 import UserContext from './UserContext';
 import { useNavigate } from 'react-router-dom'
 
@@ -35,10 +34,10 @@ const DoctorPage = () => {
     <>
       <Typography>Welcome {name}</Typography>
       <Typography>{department}</Typography>
-      <Button 
-      variant='contained' 
-      color="error" 
-      onClick={handleLogOut}
+      <Button
+        variant='contained'
+        color="error"
+        onClick={handleLogOut}
       >LOGOUT</Button>
       <TableContainer component={Paper}>
         <Table>
