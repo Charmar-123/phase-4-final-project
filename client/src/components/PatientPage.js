@@ -3,28 +3,26 @@ import UserContext from './UserContext';
 
 import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Button, Typography } from '@mui/material';
 
-// import { DemoContainer } from '@mui/x-date-pickers/internals/demo';
-// import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
-// import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
-// import { DatePicker } from '@mui/x-date-pickers/DatePicker';
-
-
 import { useNavigate } from 'react-router-dom'
 
 
+
+
+import dayjs from 'dayjs';
+import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
+import { DatePicker } from '@mui/x-date-pickers/DatePicker';
+
+
+
 const PatientPage = () => {
-
-
   const [viewAppFrom, setViewAppForm] = useState(false);
-
-
   const navigate = useNavigate();
-
-
   const { loggedInPatient, setLoggedInPatient, setSelectedAppointment, patientAppointments } = useContext(UserContext);
   const { name } = loggedInPatient
-  // setAppointments(loggedInPatient.appointments)
-  console.log(patientAppointments);
+
+
+  const [value, setValue] = React.useState(dayjs());
 
   const handleLogOut = () => {
     fetch('/logout', {
@@ -54,14 +52,19 @@ const PatientPage = () => {
   return (
 
     <>
-      {/* <LocalizationProvider dateAdapter={AdapterDayjs}>
-        <DemoContainer components={['DatePicker']}>
-          <DatePicker
-          // value={value} 
-          // onChange={(newValue) => setValue(newValue)} 
-          />
-        </DemoContainer>
-      </LocalizationProvider> */}
+      <Typography>HIII</Typography>
+
+      <LocalizationProvider dateAdapter={AdapterDayjs}>
+        <DatePicker
+          disablePast
+          format="DD-MM-YYYY"
+          value={value}
+          onChange={(newValue) => {
+            console.log(dayjs(newValue).format('YYYY-MM-DD'));
+            setValue(dayjs(newValue).format('YYYY-MM-DD'))}}
+        />
+
+    </LocalizationProvider>
 
 
       <Typography>Welcome {name}</Typography>
