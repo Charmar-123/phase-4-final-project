@@ -45,7 +45,7 @@ const PatientPage = () => {
       })
   }
 
-// fetch nested data with doctors or do seperate fetches ??
+  // fetch nested data with doctors or do seperate fetches ??
   const handleViewAppointment = (id) => {
     fetch(`/appointments/${id}`)
       .then(res => res.json())
@@ -56,12 +56,16 @@ const PatientPage = () => {
       })
   }
 
+  const handleEditAppointment = (id) => {
+
+  }
+
   const handleSubmitAppointment = (e) => {
     e.preventDefault();
     fetch('/appointments', {
       method: 'POST',
-      headers: {'Content-Type' : 'application/json'},
-      body:JSON.stringify({
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
         date: appointmentDate,
         time: appointmentTime,
         reason_for_visit: appointmentRFV,
@@ -69,16 +73,19 @@ const PatientPage = () => {
         patient_id: id
       })
     })
-    .then(res => {
-      if (res.ok){
-        res.json().then(addAppointment)
-      } else {
-        res.json().then(json => {
-          console.log(json.errors);
-          setErrors(json.errors)
+      .then(res => {
+        if (res.ok) {
+          res.json().then((appoinment) => {
+            addAppointment(appoinment)
+            setViewAppForm(false)
+          })
+        } else {
+          res.json().then(json => {
+            console.log(json.errors);
+            setErrors(json.errors)
+          })
+        }
       })
-      }
-    })
     console.log(
       {
         date: appointmentDate,
@@ -96,82 +103,81 @@ const PatientPage = () => {
   return (
 
     <>
-      <Typography>HIII</Typography>
+      <Box sx={{marginTop:5, marginLeft: 5}} display={viewAppFrom ?  '' : 'none'}>
+        <Typography sx={{marginBottom:2}} variant='h3'>Book Your Appointment</Typography>
 
-      <form onSubmit={handleSubmitAppointment}>
+        <form onSubmit={handleSubmitAppointment}>
 
-        <LocalizationProvider dateAdapter={AdapterDayjs}>
-          <DatePicker
-            disablePast
-            format="DD-MM-YYYY"
-            value={appointmentDate}
-            onChange={(newValue) => {
-              console.log(dayjs(newValue).format('YYYY-MM-DD'));
-              setAppointmentDate(dayjs(newValue).format('YYYY-MM-DD'))
-            }}
-          />
-          <TimePicker
-            label="Select Appointment Time"
-            views={['hours']}
-            minTime={dayjs().set('hour', 8)}
-            maxTime={dayjs().set('hour', 17)}
-            value={appointmentTime}
-            onChange={(newValue) => {
-              console.log(dayjs(newValue).format('h A'));
-              setAppointmentTime(dayjs(newValue).format('h A'))
-            }}
-          />
-        </LocalizationProvider>
-
-        <Box sx={{ width: 200 }}>
-          <FormControl fullWidth>
-            <InputLabel>Doctor</InputLabel>
-            <Select
-              value={appointmentDoctor}
-              label="Doctor"
-              onChange={(e) => {
-                console.log(e.target);
-                setAppointmentDoctor(e.target.value)
+          <LocalizationProvider dateAdapter={AdapterDayjs}>
+            <DatePicker
+              sx={{marginRight: 2, marginBottom: 2}}
+              disablePast
+              label='Select A Date'
+              format="DD-MM-YYYY"
+              value={appointmentDate}
+              onChange={(newValue) => {
+                console.log(dayjs(newValue).format('YYYY-MM-DD'));
+                setAppointmentDate(dayjs(newValue).format('YYYY-MM-DD'))
               }}
-            >
-              {doctorsData.map(({ id, name }) => <MenuItem key={id} value={id}>{name}</MenuItem>)}
+            />
+            <TimePicker
+              label="Select Appointment Time"
+              views={['hours']}
+              minTime={dayjs().set('hour', 8)}
+              maxTime={dayjs().set('hour', 17)}
+              value={appointmentTime}
+              onChange={(newValue) => {
+                console.log(dayjs(newValue).format('h A'));
+                setAppointmentTime(dayjs(newValue).format('h A'))
+              }}
+            />
+          </LocalizationProvider>
 
-            </Select>
-          </FormControl>
-        </Box>
+          <Box sx={{ width: 200, marginBottom:3 }}>
+            <FormControl fullWidth>
+              <InputLabel>Doctor</InputLabel>
+              <Select
+                
+                value={appointmentDoctor}
+                label="Doctor"
+                onChange={(e) => {
+                  console.log(e.target);
+                  setAppointmentDoctor(e.target.value)
+                }}
+              >
+                {doctorsData.map(({ id, name }) => <MenuItem key={id} value={id}>{name}</MenuItem>)}
 
-    
-
-        <TextField onChange={(e) => setAppointmentRFV(e.target.value)} label="Reason for visit" variant="outlined" />
-        <Button
-          variant='contained'
-          color="error"
-          type='submit'
-        >SUBMIT</Button>
-      </form>
-
-
-
-
-
-
+              </Select>
+            </FormControl>
+          </Box>
 
 
 
+          <TextField onChange={(e) => setAppointmentRFV(e.target.value)} label="Reason for visit" variant="outlined" />
+          <Button
+          sx={{marginLeft: 3}}
+            variant='contained'
+            color="error"
+            type='submit'
+          >SUBMIT</Button>
+        </form>
+      </Box>
 
 
 
-      <Typography>Welcome {name}</Typography>
+      <Typography sx={{ marginTop: 5}} variant='h4'>Welcome {name}</Typography>
+      
       <Button
+        variant='contained'
+
+        onClick={() => setViewAppForm(true)}
+      >Book Appointment</Button>
+      <Button
+      sx={{marginLeft: 3}}
         variant='contained'
         color="error"
         onClick={handleLogOut}
       >LOGOUT</Button>
-      <Button
-        variant='contained'
-        color="error"
-        onClick={() => setViewAppForm(true)}
-      >Book Appointment</Button>
       <TableContainer component={Paper}>
         <Table>
           <TableHead>
@@ -180,6 +186,7 @@ const PatientPage = () => {
               <TableCell>Time</TableCell>
               <TableCell>Date</TableCell>
               <TableCell>View Appointment</TableCell>
+              <TableCell>Edit Appointment</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
@@ -192,6 +199,11 @@ const PatientPage = () => {
                   <Button variant="outlined"
                     onClick={() => handleViewAppointment(id)}
                   >View Appointment</Button>
+                </TableCell>
+                <TableCell>
+                  <Button variant="contained"
+                    onClick={() => handleEditAppointment(id)}
+                  >Edit Appointment</Button>
                 </TableCell>
               </TableRow>
             ))}
