@@ -4,14 +4,16 @@ import React from 'react'
 
 const Home = () => {
     return (
-        <Container>
-            <Stack
-                container
-                justifyContent="center"
-                alignItems="center"
-                style={{ height: '100vh' }} // Set the desired height of the container
-            >
- 
+
+        <>
+            <Container>
+                <Stack
+
+                    justifyContent="center"
+                    alignItems="center"
+                    style={{ height: '100vh' }} // Set the desired height of the container
+                >
+
                     <Typography variant='h3'>
                         Welcome To Grey Sloan Memorial Hospital
                     </Typography>
@@ -22,9 +24,11 @@ const Home = () => {
                     </Box>
 
 
-            </Stack>
+                </Stack>
 
-        </Container>
+            </Container>
+        </>
+
 
     )
 }
