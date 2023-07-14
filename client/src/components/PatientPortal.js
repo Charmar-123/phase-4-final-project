@@ -10,11 +10,14 @@ import UserContext from './UserContext';
 
 const PatientPortal = () => {
 
+    const {setLoggedInPatient, setPatientAppointments} = useContext(UserContext);
+
     useEffect(() => {
         fetch('/authorized/patient')
             .then(res => {
                 if (res.ok) {
                     res.json().then(patient => {
+                        setLoggedInPatient(patient)
                         navigate(`/patients/${patient.id}`)
                     })
                 }
@@ -27,7 +30,7 @@ const PatientPortal = () => {
             })
 
     }, [])
-    const {setLoggedInPatient, setPatientAppointments} = useContext(UserContext);
+   
 
     const navigate = useNavigate();
     const [loginData, setLoginData] = useState({

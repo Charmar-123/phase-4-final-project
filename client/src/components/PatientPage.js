@@ -21,8 +21,7 @@ const PatientPage = () => {
   const navigate = useNavigate();
   const { doctorsData, loggedInPatient, setLoggedInPatient, setSelectedAppointment, patientAppointments } = useContext(UserContext);
   const { name, id } = loggedInPatient
-
-  console.log(loggedInPatient);
+console.log(loggedInPatient);
 
   const [appointmentDate, setAppointmentDate] = useState('');
   const [appointmentTime, setAppointmentTime] = useState(dayjs());
