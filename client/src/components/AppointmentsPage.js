@@ -50,6 +50,7 @@ const AppointmentsPage = () => {
         date: appointmentDate,
         time: appointmentTime,
         reason_for_visit: appointmentRFV,
+        doctor: doctor
       })
     }).then(res => {
       if (res.ok) {
@@ -121,8 +122,8 @@ const AppointmentsPage = () => {
       <Typography>Date: {date}</Typography>
       <Typography>Time: {time}</Typography>
       <Typography>Reason For Visit: {reason_for_visit}</Typography>
-      {/* <Typography>Doctor: {doctor.name}</Typography>
-      <Typography>Department: {doctor.department}</Typography> */}
+      <Typography>Doctor: {doctor.name}</Typography>
+      <Typography>Department: {doctor.department}</Typography>
       <Button
         variant='contained'
         color="error"
