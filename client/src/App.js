@@ -32,14 +32,28 @@ const App = () => {
 }, [])
 
 const addAppointment = (appointment) => setPatientAppointments(current => [...current, appointment])
+
 const deleteAppointment = (id) => setPatientAppointments(current => current.filter(p => p.id !== id))
+
+const updateAppointment = (updatedAppointment) => {
+  
+  setSelectedAppointment(updatedAppointment)
+  setPatientAppointments(current => {
+  return current.map(appointment => {
+    if (appointment.id === updatedAppointment.id){
+      return updatedAppointment
+    } else {
+      return appointment
+    }
+  })
+})}
 
 
   return (
     <>
       <NavigationBar />
       <UserContext.Provider
-       value={{doctorsData, loggedInDoctor, setLoggedInDoctor, loggedInPatient, setLoggedInPatient, selectedAppointment, setSelectedAppointment, patientAppointments, setPatientAppointments, deleteAppointment, addAppointment}}>
+       value={{doctorsData, loggedInDoctor, setLoggedInDoctor, loggedInPatient, setLoggedInPatient, selectedAppointment, setSelectedAppointment, patientAppointments, setPatientAppointments, deleteAppointment, addAppointment, updateAppointment}}>
         <Routes>
 
           <Route path='/' element={<Home/>} />

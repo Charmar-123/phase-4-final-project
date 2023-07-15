@@ -62,6 +62,13 @@ const PatientPage = () => {
 
   const handleSubmitAppointment = (e) => {
     e.preventDefault();
+    console.log({
+      date: appointmentDate,
+      time: appointmentTime,
+      reason_for_visit: appointmentRFV,
+      doctor_id: appointmentDoctor,
+      patient_id: id
+    });
     fetch('/appointments', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -86,16 +93,6 @@ const PatientPage = () => {
           })
         }
       })
-    console.log(
-      {
-        date: appointmentDate,
-        time: appointmentTime,
-        reason_for_visit: appointmentRFV,
-        doctor_id: appointmentDoctor,
-        patient_id: id
-      }
-
-    );
   }
 
 
@@ -186,7 +183,6 @@ const PatientPage = () => {
               <TableCell>Time</TableCell>
               <TableCell>Date</TableCell>
               <TableCell>View Appointment</TableCell>
-              <TableCell>Edit Appointment</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
@@ -199,11 +195,6 @@ const PatientPage = () => {
                   <Button variant="outlined"
                     onClick={() => handleViewAppointment(id)}
                   >View Appointment</Button>
-                </TableCell>
-                <TableCell>
-                  <Button variant="contained"
-                    onClick={() => handleEditAppointment(id)}
-                  >Edit Appointment</Button>
                 </TableCell>
               </TableRow>
             ))}

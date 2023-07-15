@@ -17,6 +17,12 @@ class AppointmentsController < ApplicationController
         render json: appointment, status: :ok
     end
 
+    def update 
+        appointment = Appointment.find(params[:id])
+        appointment.update!(appointment_params)
+        render json: appointment, status: :accepted
+    end 
+
     def destroy
         appointment = Appointment.find_by(id: params[:id])
         appointment.destroy
