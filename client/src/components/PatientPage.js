@@ -24,7 +24,7 @@ const PatientPage = () => {
   const { doctorsData, loggedInPatient, setLoggedInPatient, setSelectedAppointment, patientAppointments, addAppointment } = useContext(UserContext);
   const { name, id } = loggedInPatient
 
-
+  console.log(loggedInPatient);
   const [appointmentDate, setAppointmentDate] = useState('');
   const [appointmentTime, setAppointmentTime] = useState(dayjs());
   const [appointmentDoctor, setAppointmentDoctor] = useState('');
@@ -56,9 +56,6 @@ const PatientPage = () => {
       })
   }
 
-  const handleEditAppointment = (id) => {
-
-  }
 
   const handleSubmitAppointment = (e) => {
     e.preventDefault();
