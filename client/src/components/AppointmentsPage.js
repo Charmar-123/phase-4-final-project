@@ -19,10 +19,8 @@ const AppointmentsPage = () => {
 
 
 
-  // const selectedAppointment = loggedInPatient.appoinments.find((app) => app.id === params.id )
   console.log(selectedAppointment);
   const { id, date, time, reason_for_visit, doctor } = selectedAppointment;
-  // console.log(doctor);
 
 
   const [appointmentDate, setAppointmentDate] = useState(date);

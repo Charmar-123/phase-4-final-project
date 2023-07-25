@@ -3,7 +3,7 @@ class AppointmentSerializer < ActiveModel::Serializer
 
  
   def doctor
-      AppointmentDoctorSerializer.new(object.doctor, only: [:name, :department])
+      AppointmentDoctorSerializer.new(object.doctor)
   end 
 
 end

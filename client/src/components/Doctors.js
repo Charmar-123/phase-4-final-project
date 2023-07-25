@@ -1,9 +1,10 @@
-import React from 'react'
+import React, {useContext} from 'react'
 import DoctorCard from './DoctorCard'
 import { Grid } from '@mui/material'
+import UserContext from './UserContext';
 
-const Doctors = ({ doctorsData }) => {
-
+const Doctors = () => {
+    const { doctorsData } = useContext(UserContext);
 
     const doctors = doctorsData.map(({ id, name, department, image_url, description }) => {
         return (
