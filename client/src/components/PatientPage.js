@@ -47,8 +47,8 @@ const PatientPage = () => {
 
   // fetch nested data with doctors or do seperate fetches ??
   const handleViewAppointment = (id) => {
-
-    setSelectedAppointment(loggedInPatient.appointments.find(app => app.id === id))
+    console.log(patientAppointments);
+    setSelectedAppointment(patientAppointments.find(app => app.id === id))
     navigate(`/appointments/${id}`)
   }
 
@@ -56,13 +56,6 @@ const PatientPage = () => {
 
   const handleSubmitAppointment = (e) => {
     e.preventDefault();
-    console.log({
-      date: appointmentDate,
-      time: appointmentTime,
-      reason_for_visit: appointmentRFV,
-      doctor_id: appointmentDoctor,
-      patient_id: id
-    });
     fetch('/appointments', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -76,13 +69,14 @@ const PatientPage = () => {
     })
       .then(res => {
         if (res.ok) {
-          res.json().then((appoinment) => {
-            addAppointment(appoinment)
+          res.json().then((appointment) => {
+            // console.log(appoinment);
+            addAppointment(appointment)
             setViewAppForm(false)
           })
         } else {
           res.json().then(json => {
-            console.log(json.errors);
+            // console.log(json.errors);
             setErrors(json.errors)
           })
         }
@@ -107,7 +101,7 @@ const PatientPage = () => {
               format="DD-MM-YYYY"
               value={appointmentDate}
               onChange={(newValue) => {
-                console.log(dayjs(newValue).format('YYYY-MM-DD'));
+                // console.log(dayjs(newValue).format('YYYY-MM-DD'));
                 setAppointmentDate(dayjs(newValue).format('YYYY-MM-DD'))
               }}
             />
@@ -118,7 +112,7 @@ const PatientPage = () => {
               maxTime={dayjs().set('hour', 17)}
               value={appointmentTime}
               onChange={(newValue) => {
-                console.log(dayjs(newValue).format('h A'));
+                // console.log(dayjs(newValue).format('h A'));
                 setAppointmentTime(dayjs(newValue).format('h A'))
               }}
             />
@@ -132,7 +126,7 @@ const PatientPage = () => {
                 value={appointmentDoctor}
                 label="Doctor"
                 onChange={(e) => {
-                  console.log(e.target);
+                  // console.log(e.target);
                   setAppointmentDoctor(e.target.value)
                 }}
               >

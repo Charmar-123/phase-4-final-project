@@ -19,7 +19,7 @@ const AppointmentsPage = () => {
 
 
 
-  const { id, date, time, reason_for_visit, doctor } = selectedAppointment;
+  const { id, date, time, reason_for_visit, doctor_name, doctor_department } = selectedAppointment;
 
 
   const [appointmentDate, setAppointmentDate] = useState(date);
@@ -135,8 +135,8 @@ const AppointmentsPage = () => {
         <Typography>Date: {date}</Typography>
         <Typography>Time: {time}</Typography>
         <Typography>Reason For Visit: {reason_for_visit}</Typography>
-        <Typography>Doctor: {doctor.name}</Typography>
-        <Typography>Department: {doctor.department}</Typography>
+        <Typography>Doctor: {doctor_name}</Typography>
+        <Typography>Department: {doctor_department}</Typography>
         <Button
           variant='contained'
           color="error"

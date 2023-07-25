@@ -31,6 +31,7 @@ const PatientPortal = () => {
                     res.json().then(patient => {
                         setPatientAppointments(patient.appointments)
                         setLoggedInPatient(patient)
+                        console.log(patient);
                         navigate(`/patients/${patient.id}`)
                     })
                 }
