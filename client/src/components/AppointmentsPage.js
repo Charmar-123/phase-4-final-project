@@ -15,9 +15,10 @@ const AppointmentsPage = () => {
 
   const params = useParams();
   const navigate = useNavigate();
-  const { selectedAppointment, deleteAppointment, updateAppointment, setSelectedAppointment } = useContext(UserContext);
+  const { deleteAppointment, updateAppointment, loggedInPatient } = useContext(UserContext);
+  
 
-
+  const selectedAppointment = loggedInPatient.appointments.find(app => app.id === parseInt(params.id));
 
   const { id, date, time, reason_for_visit, doctor_name, doctor_department } = selectedAppointment;
 
@@ -39,8 +40,8 @@ const AppointmentsPage = () => {
     })
       .then(res => {
         if (res.ok) {
-          deleteAppointment(id)
-          navigate(-1)
+          deleteAppointment(params.id)
+          navigate(`/patients/${loggedInPatient.id}`)
         }
       })
   }
@@ -64,7 +65,6 @@ const AppointmentsPage = () => {
       if (res.ok) {
         res.json().then((appoinment) => {
           console.log(appoinment);
-          setSelectedAppointment(appoinment)
           updateAppointment(appoinment)
           setViewAppForm(false)
         })

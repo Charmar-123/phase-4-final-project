@@ -21,7 +21,7 @@ const PatientPage = () => {
   const [errors, setErrors] = useState('')
   const [viewAppFrom, setViewAppForm] = useState(false);
   const navigate = useNavigate();
-  const { doctorsData, loggedInPatient, setLoggedInPatient, setSelectedAppointment, patientAppointments, addAppointment } = useContext(UserContext);
+  const { doctorsData, loggedInPatient, setLoggedInPatient, addAppointment } = useContext(UserContext);
   const { name, id } = loggedInPatient
 
 
@@ -45,10 +45,9 @@ const PatientPage = () => {
       })
   }
 
-  // fetch nested data with doctors or do seperate fetches ??
   const handleViewAppointment = (id) => {
-    console.log(patientAppointments);
-    setSelectedAppointment(patientAppointments.find(app => app.id === id))
+
+
     navigate(`/appointments/${id}`)
   }
 
@@ -174,7 +173,7 @@ const PatientPage = () => {
             </TableRow>
           </TableHead>
           <TableBody>
-            {patientAppointments.map(({ id, reason_for_visit, time, date }) => (
+            {loggedInPatient.appointments && loggedInPatient.appointments.map(({ id, reason_for_visit, time, date }) => (
               <TableRow key={id}>
                 <TableCell>{reason_for_visit}</TableCell>
                 <TableCell>{time}</TableCell>

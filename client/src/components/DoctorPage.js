@@ -10,10 +10,6 @@ const DoctorPage = () => {
   const { setLoggedInDoctor, loggedInDoctor } = useContext(UserContext);
 
   const { name, department } = loggedInDoctor
-  let patients = [];
-  if (Array.isArray(loggedInDoctor.patients)) {
-    patients = loggedInDoctor.patients
-  }
 
 
   const handleLogOut = () => {
@@ -50,7 +46,7 @@ const DoctorPage = () => {
             </TableRow>
           </TableHead>
           <TableBody>
-            {patients.map(({ id, name, age, history, email }) => (
+            {loggedInDoctor.patients && loggedInDoctor.patients.map(({ id, name, age, history, email }) => (
               <TableRow key={id}>
                 <TableCell>{name}</TableCell>
                 <TableCell>{age}</TableCell>

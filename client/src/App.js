@@ -21,47 +21,61 @@ const App = () => {
 
   const [loggedInDoctor, setLoggedInDoctor] = useState([]);
   const [loggedInPatient, setLoggedInPatient] = useState([]);
-  const [patientAppointments, setPatientAppointments] = useState([]);
-  const [selectedAppointment, setSelectedAppointment] = useState([])
 
 
-  useEffect(()=> {
+
+  useEffect(() => {
     fetch('/doctors')
-    .then(res=> res.json())
-    .then(data => setDoctorsData(data))
-}, [])
+      .then(res => res.json())
+      .then(data => setDoctorsData(data))
+  }, [])
+  // console.log({...loggedInPatient, appointments: [...loggedInPatient.appointments, newAppointment] });
 
-const addAppointment = (appointment) => setPatientAppointments(current => [...current, appointment])
+  const addAppointment = (newAppointment) => {
 
-const deleteAppointment = (id) => setPatientAppointments(current => current.filter(p => p.id !== id))
+    const newAppointments = [...loggedInPatient.appointments, newAppointment]
 
-const updateAppointment = (updatedAppointment) => {
-  
-  setPatientAppointments(current => {
-  return current.map(appointment => {
-    if (appointment.id === updatedAppointment.id){
-      return updatedAppointment
-    } else {
-      return appointment
-    }
-  })
-})}
+    setLoggedInPatient({ ...loggedInPatient, appointments: newAppointments  })
+  }
+  const deleteAppointment = (id) => {
+    console.log(id);
+    const filteredAppointments = loggedInPatient.appointments.filter(appointment => appointment.id !== parseInt(id))
+    console.log(filteredAppointments);
+
+    setLoggedInPatient({ ...loggedInPatient, appointments: filteredAppointments })
+  }
+
+  const updateAppointment = (updatedAppointment) => {
+
+
+    const updateAppointments = loggedInPatient.appointments.map((appointment => {
+      if (appointment.id === updatedAppointment.id) {
+        return updatedAppointment
+      } else {
+        return appointment
+      }
+    }))
+
+    setLoggedInPatient({
+      ...loggedInPatient, appointments: updateAppointments
+    })
+  }
 
 
   return (
     <>
       <NavigationBar />
       <UserContext.Provider
-       value={{doctorsData, loggedInDoctor, setLoggedInDoctor, loggedInPatient, setLoggedInPatient, selectedAppointment, setSelectedAppointment, patientAppointments, setPatientAppointments, deleteAppointment, addAppointment, updateAppointment}}>
+        value={{ doctorsData, loggedInDoctor, setLoggedInDoctor, loggedInPatient, setLoggedInPatient, deleteAppointment, addAppointment, updateAppointment }}>
         <Routes>
 
-          <Route path='/' element={<Home/>} />
-          <Route path='/doctors' element={<Doctors doctorsData={doctorsData} />} />
-          <Route path='/doctors/:id' element={<DoctorPage />}/>
-          <Route path='/doctors/login' element={<DoctorPortal/>} />
-          <Route path='/patients/:id' element={<PatientPage/>} />
-          <Route path='/patients/login' element={<PatientPortal/>} />
-          <Route path='/appointments/:id' element={<AppointmentsPage/>} />
+          <Route path='/' element={<Home />} />
+          <Route path='/doctors' element={<Doctors />} />
+          <Route path='/doctors/:id' element={<DoctorPage />} />
+          <Route path='/doctors/login' element={<DoctorPortal />} />
+          <Route path='/patients/:id' element={<PatientPage />} />
+          <Route path='/patients/login' element={<PatientPortal />} />
+          <Route path='/appointments/:id' element={<AppointmentsPage />} />
 
         </Routes>
       </UserContext.Provider>

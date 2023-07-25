@@ -11,7 +11,7 @@ const PatientPortal = () => {
 
 
     const navigate = useNavigate();
-    const {setLoggedInPatient, setPatientAppointments} = useContext(UserContext);
+    const {setLoggedInPatient} = useContext(UserContext);
 
 
 
@@ -29,9 +29,7 @@ const PatientPortal = () => {
             .then(res => {
                 if (res.ok) {
                     res.json().then(patient => {
-                        setPatientAppointments(patient.appointments)
                         setLoggedInPatient(patient)
-                        console.log(patient);
                         navigate(`/patients/${patient.id}`)
                     })
                 }
@@ -72,7 +70,6 @@ const PatientPortal = () => {
             if(res.ok){
                 res.json().then(patient =>{
                     console.log(patient);
-                    setPatientAppointments(patient.appointments)
                     setLoggedInPatient(patient)
                     navigate(`/patients/${patient.id}`)
                 })
