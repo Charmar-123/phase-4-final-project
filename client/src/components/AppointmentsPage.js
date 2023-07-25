@@ -11,7 +11,16 @@ import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import { TimePicker } from '@mui/x-date-pickers/TimePicker';
 const AppointmentsPage = () => {
+
+
+  const params = useParams();
+  const navigate = useNavigate();
   const { selectedAppointment, deleteAppointment, updateAppointment } = useContext(UserContext);
+
+
+
+  // const selectedAppointment = loggedInPatient.appoinments.find((app) => app.id === params.id )
+  console.log(selectedAppointment);
   const { id, date, time, reason_for_visit, doctor } = selectedAppointment;
   // console.log(doctor);
 
@@ -23,8 +32,7 @@ const AppointmentsPage = () => {
 
   const [errors, setErrors] = useState('')
   const [viewAppFrom, setViewAppForm] = useState(false);
-  const params = useParams();
-  const navigate = useNavigate();
+
 
 
 

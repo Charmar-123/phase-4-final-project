@@ -24,7 +24,7 @@ const PatientPage = () => {
   const { doctorsData, loggedInPatient, setLoggedInPatient, setSelectedAppointment, patientAppointments, addAppointment } = useContext(UserContext);
   const { name, id } = loggedInPatient
 
-  console.log(loggedInPatient);
+
   const [appointmentDate, setAppointmentDate] = useState('');
   const [appointmentTime, setAppointmentTime] = useState(dayjs());
   const [appointmentDoctor, setAppointmentDoctor] = useState('');
@@ -47,14 +47,10 @@ const PatientPage = () => {
 
   // fetch nested data with doctors or do seperate fetches ??
   const handleViewAppointment = (id) => {
-    fetch(`/appointments/${id}`)
-      .then(res => res.json())
-      .then(appointment => {
-        console.log(appointment)
-        setSelectedAppointment(appointment)
-        navigate(`/appointments/${appointment.id}`)
-      })
-  }
+    setSelectedAppointment(loggedInPatient.appointments.find(app => app.id === id))
+        navigate(`/appointments/${id}`)
+      }
+  
 
 
   const handleSubmitAppointment = (e) => {
