@@ -1,16 +1,4 @@
-# Admins seed data
 
-admins_data =[
-  name: "Stephanie Stevens",
-  #  email: "#{self.name.gsub(/\b(\w)\w*\b/) { $1 }}"
-]
-admins_data.each do |admin|
-Admin.create(
-  name: admin[:name],
-  email: admin[:name].sub(/^(\w)\w*\s(\w+)/, '\1\2@admin.sgh.com').downcase,
-  password_digest: BCrypt::Password.create("1234")
-)
-end
 
 # Doctors' seed data
 doctor_names = [
@@ -39,7 +27,7 @@ doctor_names = [
   ]
   
   doctor_names.each do |doctor|
-    Doctor.create(name: doctor[:name], department: doctor[:department], image_url: doctor[:image_url], description: doctor[:description], admin_id: 1, email: doctor[:name].sub(/^(\w)\w*\s(\w+)/, '\1\2@doc.sgh.com').downcase, password_digest: BCrypt::Password.create("1234"))
+    Doctor.create(name: doctor[:name], department: doctor[:department], image_url: doctor[:image_url], description: doctor[:description], email: doctor[:name].sub(/^(\w)\w*\s(\w+)/, '\1\2@doc.sgh.com').downcase, password_digest: BCrypt::Password.create("1234"))
   end
   
   

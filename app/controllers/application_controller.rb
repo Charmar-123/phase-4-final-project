@@ -32,20 +32,4 @@ class ApplicationController < ActionController::API
   end 
 
 
-
-
-
-
-
-
-
-  def current_admin
-    admin = Admin.find_by(id: session[:admin_id])
-      admin
-  end  
-
-  def authorized_admin
-      render json: {errors: "Not Authorized"}, status: :unauthorized unless current_admin
-  end 
-
 end

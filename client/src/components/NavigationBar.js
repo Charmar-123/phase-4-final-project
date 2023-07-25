@@ -15,7 +15,6 @@ const NavigationBar = () => {
                         <Link href='/doctors' sx={{marginLeft: 3, color: '#fff' }}>Our Doctors</Link>
                         <Link href='/patients/login' sx={{marginLeft: 3, color: '#fff' }}>Patient Portal</Link>
                         <Link href='/doctors/login' sx={{marginLeft: 3, color: '#fff' }}>Doctor Portal</Link>
-                        <Link sx={{marginLeft: 3, color: '#fff' }}>Admin Portal</Link>
 
                     </Box>
                 </Toolbar>
