@@ -56,11 +56,6 @@ const DoctorPage = () => {
                 <TableCell>{age}</TableCell>
                 <TableCell>{history}</TableCell>
                 <TableCell>{email}</TableCell>
-                <TableCell>
-                  <Button variant="outlined"
-
-                  >Button</Button>
-                </TableCell>
               </TableRow>
             ))}
           </TableBody>

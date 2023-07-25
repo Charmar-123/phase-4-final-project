@@ -6,14 +6,7 @@ class ApplicationController < ActionController::API
 
 
   private 
-  def current_admin
-    admin = Admin.find_by(id: session[:admin_id])
-      admin
-  end  
-
-  def authorized_admin
-      render json: {errors: "Not Authorized"}, status: :unauthorized unless current_admin
-  end 
+ 
   def current_doctor 
     current_doctor = Doctor.find_by(id: session[:doctor_id])
     current_doctor
@@ -36,6 +29,23 @@ class ApplicationController < ActionController::API
 
    def render_not_found(error)
       render json: {errors: {error.model => "Not Found"}}, status: :not_found
+  end 
+
+
+
+
+
+
+
+
+
+  def current_admin
+    admin = Admin.find_by(id: session[:admin_id])
+      admin
+  end  
+
+  def authorized_admin
+      render json: {errors: "Not Authorized"}, status: :unauthorized unless current_admin
   end 
 
 end

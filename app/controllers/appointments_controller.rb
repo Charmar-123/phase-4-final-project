@@ -1,5 +1,5 @@
 class AppointmentsController < ApplicationController
-    # before_action :authorized_appointment
+
     before_action :authorized_patient
 
     def index 

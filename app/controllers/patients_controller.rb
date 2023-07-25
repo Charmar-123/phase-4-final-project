@@ -4,8 +4,8 @@ class PatientsController < ApplicationController
     
     
     def show
-        doctor = current_patient
-        render json: doctor, status: :ok
+        patient = current_patient
+        render json: patient, status: :ok
     end
     
 

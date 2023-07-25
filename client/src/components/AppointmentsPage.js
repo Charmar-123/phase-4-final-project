@@ -42,7 +42,7 @@ const AppointmentsPage = () => {
 
   const handleSubmitEditAppointment = (e) => {
     e.preventDefault();
-    console.log("submit");
+    // console.log("submit");
     fetch(`/appointments/${params.id}`, {
       method:'PATCH',
       headers: {'Content-Type': 'application/json'},
@@ -50,11 +50,13 @@ const AppointmentsPage = () => {
         date: appointmentDate,
         time: appointmentTime,
         reason_for_visit: appointmentRFV,
-        doctor: doctor
+
+
+        // Check why your sending back doctor
+        // doctor: doctor
       })
     }).then(res => {
       if (res.ok) {
-        console.log(res);
         res.json().then((appoinment) => {
           console.log(appoinment);
           updateAppointment(appoinment)
