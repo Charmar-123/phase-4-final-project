@@ -30,42 +30,10 @@ class SessionsController < ApplicationController
     end
 
    
-
     def destroy
         reset_session
         head :no_content
     end
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    
-    # def create_admin
-    #     reset_session
-    #     admin = Admin.find_by(email: params[:email])
-
-    #     if admin&.authenticate(params[:password])
-    #         session[:admin_id] = admin.id
-    #         # set up serializer
-    #         # render json: admin, serializer: SessionPatientCreateSerializer
-    #     else
-    #         render json: {errors: "Invalid password or email"}, status: :unauthorized
-    #     end
-
-    # end
 
 
 

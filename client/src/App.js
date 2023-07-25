@@ -37,7 +37,6 @@ const deleteAppointment = (id) => setPatientAppointments(current => current.filt
 
 const updateAppointment = (updatedAppointment) => {
   
-  setSelectedAppointment(updatedAppointment)
   setPatientAppointments(current => {
   return current.map(appointment => {
     if (appointment.id === updatedAppointment.id){

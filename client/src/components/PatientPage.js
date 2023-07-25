@@ -47,10 +47,11 @@ const PatientPage = () => {
 
   // fetch nested data with doctors or do seperate fetches ??
   const handleViewAppointment = (id) => {
+
     setSelectedAppointment(loggedInPatient.appointments.find(app => app.id === id))
-        navigate(`/appointments/${id}`)
-      }
-  
+    navigate(`/appointments/${id}`)
+  }
+
 
 
   const handleSubmitAppointment = (e) => {
@@ -93,14 +94,14 @@ const PatientPage = () => {
   return (
 
     <>
-      <Box sx={{marginTop:5, marginLeft: 5}} display={viewAppFrom ?  '' : 'none'}>
-        <Typography sx={{marginBottom:2}} variant='h3'>Book Your Appointment</Typography>
+      <Box sx={{ marginTop: 5, marginLeft: 5 }} display={viewAppFrom ? '' : 'none'}>
+        <Typography sx={{ marginBottom: 2 }} variant='h3'>Book Your Appointment</Typography>
 
         <form onSubmit={handleSubmitAppointment}>
 
           <LocalizationProvider dateAdapter={AdapterDayjs}>
             <DatePicker
-              sx={{marginRight: 2, marginBottom: 2}}
+              sx={{ marginRight: 2, marginBottom: 2 }}
               disablePast
               label='Select A Date'
               format="DD-MM-YYYY"
@@ -123,11 +124,11 @@ const PatientPage = () => {
             />
           </LocalizationProvider>
 
-          <Box sx={{ width: 200, marginBottom:3 }}>
+          <Box sx={{ width: 200, marginBottom: 3 }}>
             <FormControl fullWidth>
               <InputLabel>Doctor</InputLabel>
               <Select
-                
+
                 value={appointmentDoctor}
                 label="Doctor"
                 onChange={(e) => {
@@ -145,7 +146,7 @@ const PatientPage = () => {
 
           <TextField onChange={(e) => setAppointmentRFV(e.target.value)} label="Reason for visit" variant="outlined" />
           <Button
-          sx={{marginLeft: 3}}
+            sx={{ marginLeft: 3 }}
             variant='contained'
             color="error"
             type='submit'
@@ -155,15 +156,15 @@ const PatientPage = () => {
 
 
 
-      <Typography sx={{ marginTop: 5}} variant='h4'>Welcome {name}</Typography>
-      
+      <Typography sx={{ marginTop: 5 }} variant='h4'>Welcome {name}</Typography>
+
       <Button
         variant='contained'
 
         onClick={() => setViewAppForm(true)}
       >Book Appointment</Button>
       <Button
-      sx={{marginLeft: 3}}
+        sx={{ marginLeft: 3 }}
         variant='contained'
         color="error"
         onClick={handleLogOut}

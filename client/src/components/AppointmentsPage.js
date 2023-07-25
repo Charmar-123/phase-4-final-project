@@ -15,11 +15,10 @@ const AppointmentsPage = () => {
 
   const params = useParams();
   const navigate = useNavigate();
-  const { selectedAppointment, deleteAppointment, updateAppointment } = useContext(UserContext);
+  const { selectedAppointment, deleteAppointment, updateAppointment, setSelectedAppointment } = useContext(UserContext);
 
 
 
-  console.log(selectedAppointment);
   const { id, date, time, reason_for_visit, doctor } = selectedAppointment;
 
 
@@ -50,9 +49,9 @@ const AppointmentsPage = () => {
     e.preventDefault();
     // console.log("submit");
     fetch(`/appointments/${params.id}`, {
-      method:'PATCH',
-      headers: {'Content-Type': 'application/json'},
-      body:JSON.stringify({
+      method: 'PATCH',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
         date: appointmentDate,
         time: appointmentTime,
         reason_for_visit: appointmentRFV,
@@ -65,6 +64,7 @@ const AppointmentsPage = () => {
       if (res.ok) {
         res.json().then((appoinment) => {
           console.log(appoinment);
+          setSelectedAppointment(appoinment)
           updateAppointment(appoinment)
           setViewAppForm(false)
         })
@@ -100,6 +100,7 @@ const AppointmentsPage = () => {
               }}
             />
             <TimePicker
+              sx={{ marginRight: 2, marginBottom: 2 }}
               label="Select Appointment Time"
               views={['hours']}
               minTime={dayjs().set('hour', 8)}
@@ -126,22 +127,29 @@ const AppointmentsPage = () => {
         </form>
       </Box>
 
-      <Typography sx={{marginTop:5}} variant='h4'>Appointment Info</Typography>
-      <Typography>Date: {date}</Typography>
-      <Typography>Time: {time}</Typography>
-      <Typography>Reason For Visit: {reason_for_visit}</Typography>
-      <Typography>Doctor: {doctor.name}</Typography>
-      <Typography>Department: {doctor.department}</Typography>
-      <Button
-        variant='contained'
-        color="error"
-        onClick={handleDeleteAppointment}
-      >Cancel Appointment</Button>
-      <Button
-        sx={{ marginLeft: 3 }}
-        variant='contained'
-        onClick={() => setViewAppForm(true)}
-      >Edit Appointment</Button>
+      <Box
+      sx={{ marginLeft: 6 }}
+      >
+
+        <Typography sx={{ marginTop: 5 }} variant='h4'>Appointment Info</Typography>
+        <Typography>Date: {date}</Typography>
+        <Typography>Time: {time}</Typography>
+        <Typography>Reason For Visit: {reason_for_visit}</Typography>
+        <Typography>Doctor: {doctor.name}</Typography>
+        <Typography>Department: {doctor.department}</Typography>
+        <Button
+          variant='contained'
+          color="error"
+          onClick={handleDeleteAppointment}
+        >Cancel Appointment</Button>
+        <Button
+          sx={{ marginLeft: 3 }}
+          variant='contained'
+          onClick={() => setViewAppForm(true)}
+        >Edit Appointment</Button>
+      </Box>
+
+
     </>
 
   )
