@@ -1,5 +1,5 @@
 import React, { useContext, useState } from 'react'
-import UserContext from './UserContext';
+import { UserContext } from './UserContext.js'
 
 import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Button, Typography, TextField } from '@mui/material';
 
@@ -107,12 +107,13 @@ const PatientPage = () => {
             <TimePicker
               label="Select Appointment Time"
               views={['hours']}
+              ampm={false}
               minTime={dayjs().set('hour', 8)}
               maxTime={dayjs().set('hour', 17)}
               value={appointmentTime}
               onChange={(newValue) => {
                 // console.log(dayjs(newValue).format('h A'));
-                setAppointmentTime(dayjs(newValue).format('h A'))
+                setAppointmentTime(dayjs(newValue).format('H'))
               }}
             />
           </LocalizationProvider>

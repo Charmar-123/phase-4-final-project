@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom'
 
 import { Container, Typography, TextField, Button, } from '@mui/material';
 
-import UserContext from './UserContext';
+import { UserContext } from './UserContext.js'
 
 
 const DoctorPortal = () => {

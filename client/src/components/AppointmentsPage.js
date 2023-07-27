@@ -1,5 +1,4 @@
 import React, { useContext, useState } from 'react'
-import UserContext from './UserContext';
 import { useNavigate, useParams } from 'react-router-dom'
 import { Typography, Button } from '@mui/material';
 
@@ -10,6 +9,7 @@ import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import { TimePicker } from '@mui/x-date-pickers/TimePicker';
+import { UserContext } from './UserContext.js'
 const AppointmentsPage = () => {
 
 
@@ -103,12 +103,13 @@ const AppointmentsPage = () => {
               sx={{ marginRight: 2, marginBottom: 2 }}
               label="Select Appointment Time"
               views={['hours']}
+              ampm={false}
               minTime={dayjs().set('hour', 8)}
               maxTime={dayjs().set('hour', 17)}
-              value={dayjs(appointmentTime, 'h A')}
+              value={dayjs(appointmentTime, 'H')}
               onChange={(newValue) => {
-                console.log(dayjs(newValue).format('h A'));
-                setAppointmentTime(dayjs(newValue).format('h A'))
+                console.log(dayjs(newValue).format('H'));
+                setAppointmentTime(dayjs(newValue).format('H'))
               }}
             />
           </LocalizationProvider>

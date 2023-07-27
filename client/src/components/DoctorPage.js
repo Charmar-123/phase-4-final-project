@@ -1,5 +1,5 @@
 import React, { useContext } from 'react'
-import UserContext from './UserContext';
+import { UserContext } from './UserContext.js'
 import { useNavigate } from 'react-router-dom'
 
 import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Button, Typography } from '@mui/material';
