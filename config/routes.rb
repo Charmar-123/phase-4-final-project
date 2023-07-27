@@ -11,7 +11,9 @@ Rails.application.routes.draw do
   delete '/logout', to: 'sessions#destroy'
   get '/authorized/doctor', to: 'doctors#show'
   get '/authorized/patient', to: 'patients#show'
-  get '/authorized/admin', to: 'doctors#show'
+
+  get '/doctor_app', to: 'patients#doctor_app'
+
 
   # Routing logic: fallback requests for React Router.
   # Leave this here to help deploy your app later!

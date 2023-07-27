@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext, useState, useEffect } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import { Typography, Button } from '@mui/material';
 
@@ -10,8 +10,11 @@ import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import { TimePicker } from '@mui/x-date-pickers/TimePicker';
 import { UserContext } from './UserContext.js'
+import { DateTimePicker } from '@mui/x-date-pickers';
 const AppointmentsPage = () => {
 
+
+  const [appointmentData, setAppointmentData] = useState([])
 
   const params = useParams();
   const navigate = useNavigate();
@@ -21,6 +24,9 @@ const AppointmentsPage = () => {
   const selectedAppointment = loggedInPatient.appointments.find(app => app.id === parseInt(params.id));
 
   const { id, date, time, reason_for_visit, doctor_name, doctor_department } = selectedAppointment;
+
+  const disabledDates = appointmentData.find(app => app.doctor_name === doctor_name)
+  // console.log(disabledDates.appointments);
 
 
   const [appointmentDate, setAppointmentDate] = useState(date);
@@ -33,6 +39,13 @@ const AppointmentsPage = () => {
 
 
 
+  useEffect(() => {
+    fetch('/doctor_app')
+    .then(res => res.json())
+    .then(data => {
+      setAppointmentData(data)
+      console.log(data)})
+  }, [])
 
   const handleDeleteAppointment = () => {
     fetch(`/appointments/${params.id}`, {
@@ -88,7 +101,20 @@ const AppointmentsPage = () => {
         >
 
           <LocalizationProvider dateAdapter={AdapterDayjs}>
-            <DatePicker
+
+            <DateTimePicker
+            disablePast
+            label='Select A Date and Time'
+              format="DD-MM-YYYY    H"
+              views={["day",'hours']}
+              ampm={false}
+              value={dayjs(`${appointmentDate} ${appointmentTime}`)}
+              onChange={(newValue) => {
+                setAppointmentDate(dayjs(newValue).format('YYYY-MM-DD'));
+                setAppointmentTime(dayjs(newValue).format('H'));
+              }}
+            />
+            {/* <DatePicker
               sx={{ marginRight: 2, marginBottom: 2 }}
               disablePast
               label='Select A Date'
@@ -111,7 +137,7 @@ const AppointmentsPage = () => {
                 console.log(dayjs(newValue).format('H'));
                 setAppointmentTime(dayjs(newValue).format('H'))
               }}
-            />
+            /> */}
           </LocalizationProvider>
 
 
