@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext, useState, useEffect } from 'react'
 import { UserContext } from './UserContext.js'
 
 import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Button, Typography, TextField } from '@mui/material';
@@ -16,6 +16,9 @@ import { DateTimePicker } from "@mui/x-date-pickers/DateTimePicker";
 
 const PatientPage = () => {
 
+  
+  const [appointmentData, setAppointmentData] = useState([])
+
   const [errors, setErrors] = useState('')
   const [viewAppFrom, setViewAppForm] = useState(false);
   const navigate = useNavigate();
@@ -27,7 +30,6 @@ const PatientPage = () => {
   const [appointmentTime, setAppointmentTime] = useState(dayjs());
   const [appointmentDoctor, setAppointmentDoctor] = useState('');
   const [appointmentRFV, setAppointmentRFV] = useState('');
-
 
 
 
@@ -73,8 +75,9 @@ const PatientPage = () => {
           })
         } else {
           res.json().then(json => {
-            // console.log(json.errors);
+            console.log(json.errors);
             setErrors(json.errors)
+            alert(json.errors.appointment)
           })
         }
       })
@@ -98,7 +101,9 @@ const PatientPage = () => {
               views={["day",'hours']}
               minDate={dayjs()}
               maxDate={dayjs().add(30, "day")}
-              minTime={dayjs().set("hour", 8)}
+              minTime={ dayjs(`${appointmentDate} ${appointmentTime}`).isSame(dayjs(), "day") && dayjs().isAfter(dayjs().set("hour", 8))
+              ? dayjs()
+              : dayjs(`${appointmentDate} ${appointmentTime}`).set("hour", 8)}
               maxTime={dayjs().set("hour", 17)}
               ampm={false}
               value={dayjs(`${appointmentDate} ${appointmentTime}`)}

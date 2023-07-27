@@ -13,7 +13,6 @@ import { DateTimePicker } from "@mui/x-date-pickers/DateTimePicker";
 const AppointmentsPage = () => {
 
 
-  const [appointmentData, setAppointmentData] = useState([])
 
   const params = useParams();
   const navigate = useNavigate();
@@ -24,8 +23,6 @@ const AppointmentsPage = () => {
 
   const { id, date, time, reason_for_visit, doctor_name, doctor_department } = selectedAppointment;
 
-  const disabledDates = appointmentData.find(app => app.doctor_name === doctor_name)
-  // console.log(disabledDates.appointments);
 
 
   const [appointmentDate, setAppointmentDate] = useState(date);
@@ -37,15 +34,6 @@ const AppointmentsPage = () => {
   const [viewAppFrom, setViewAppForm] = useState(false);
 
 
-
-  useEffect(() => {
-    fetch('/doctor_app')
-      .then(res => res.json())
-      .then(data => {
-        setAppointmentData(data)
-        console.log(data)
-      })
-  }, [])
 
   const handleDeleteAppointment = () => {
     fetch(`/appointments/${params.id}`, {
@@ -103,14 +91,16 @@ const AppointmentsPage = () => {
           <LocalizationProvider dateAdapter={AdapterDayjs}>
 
             <DateTimePicker
-              // disablePast
+     
               views={["day", 'hours']}
               ampm={false}
               label='Select A Date and Time'
               format="DD-MM-YYYY    H"
               minDate={dayjs()}
               maxDate={dayjs().add(30, "day")}
-              minTime={dayjs().set("hour", 8)}
+              minTime={ dayjs(`${appointmentDate} ${appointmentTime}`).isSame(dayjs(), "day") && dayjs().isAfter(dayjs().set("hour", 8))
+              ? dayjs()
+              : dayjs(`${appointmentDate} ${appointmentTime}`).set("hour", 8)}
               maxTime={dayjs().set("hour", 17)}
               
               value={dayjs(`${appointmentDate} ${appointmentTime}`)}
