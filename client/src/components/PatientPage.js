@@ -14,7 +14,7 @@ import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import { TimePicker } from '@mui/x-date-pickers/TimePicker';
 
-
+import { DateTimePicker } from '@mui/x-date-pickers';
 
 const PatientPage = () => {
 
@@ -93,7 +93,24 @@ const PatientPage = () => {
         <form onSubmit={handleSubmitAppointment}>
 
           <LocalizationProvider dateAdapter={AdapterDayjs}>
-            <DatePicker
+
+             <DateTimePicker
+            disablePast
+            label='Select A Date and Time'
+              format="DD-MM-YYYY    H"
+              views={["day",'hours']}
+              minDate={dayjs()}
+              maxDate={dayjs().add(30, "day")}
+              minTime={dayjs().set("hour", 8)}
+              maxTime={dayjs().set("hour", 17)}
+              ampm={false}
+              value={dayjs(`${appointmentDate} ${appointmentTime}`)}
+              onChange={(newValue) => {
+                setAppointmentDate(dayjs(newValue).format('YYYY-MM-DD'));
+                setAppointmentTime(dayjs(newValue).format('H'));
+              }}
+            />
+            {/* <DatePicker
               sx={{ marginRight: 2, marginBottom: 2 }}
               disablePast
               label='Select A Date'
@@ -115,7 +132,7 @@ const PatientPage = () => {
                 // console.log(dayjs(newValue).format('h A'));
                 setAppointmentTime(dayjs(newValue).format('H'))
               }}
-            />
+            /> */}
           </LocalizationProvider>
 
           <Box sx={{ width: 200, marginBottom: 3 }}>

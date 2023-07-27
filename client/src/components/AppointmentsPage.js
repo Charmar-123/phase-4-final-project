@@ -19,7 +19,7 @@ const AppointmentsPage = () => {
   const params = useParams();
   const navigate = useNavigate();
   const { deleteAppointment, updateAppointment, loggedInPatient } = useContext(UserContext);
-  
+
 
   const selectedAppointment = loggedInPatient.appointments.find(app => app.id === parseInt(params.id));
 
@@ -41,10 +41,11 @@ const AppointmentsPage = () => {
 
   useEffect(() => {
     fetch('/doctor_app')
-    .then(res => res.json())
-    .then(data => {
-      setAppointmentData(data)
-      console.log(data)})
+      .then(res => res.json())
+      .then(data => {
+        setAppointmentData(data)
+        console.log(data)
+      })
   }, [])
 
   const handleDeleteAppointment = () => {
@@ -103,10 +104,14 @@ const AppointmentsPage = () => {
           <LocalizationProvider dateAdapter={AdapterDayjs}>
 
             <DateTimePicker
-            disablePast
-            label='Select A Date and Time'
+              disablePast
+              label='Select A Date and Time'
               format="DD-MM-YYYY    H"
-              views={["day",'hours']}
+              minDate={dayjs()}
+              maxDate={dayjs().add(30, "day")}
+              minTime={dayjs().set("hour", 8)}
+              maxTime={dayjs().set("hour", 17)}
+              views={["day", 'hours']}
               ampm={false}
               value={dayjs(`${appointmentDate} ${appointmentTime}`)}
               onChange={(newValue) => {
@@ -155,7 +160,7 @@ const AppointmentsPage = () => {
       </Box>
 
       <Box
-      sx={{ marginLeft: 6 }}
+        sx={{ marginLeft: 6 }}
       >
 
         <Typography sx={{ marginTop: 5 }} variant='h4'>Appointment Info</Typography>
