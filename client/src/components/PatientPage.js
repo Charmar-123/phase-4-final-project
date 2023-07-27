@@ -11,10 +11,8 @@ import { Box, InputLabel, MenuItem, FormControl, Select } from '@mui/material'
 import dayjs from 'dayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
-import { DatePicker } from '@mui/x-date-pickers/DatePicker';
-import { TimePicker } from '@mui/x-date-pickers/TimePicker';
 
-import { DateTimePicker } from '@mui/x-date-pickers';
+import { DateTimePicker } from "@mui/x-date-pickers/DateTimePicker";
 
 const PatientPage = () => {
 
@@ -95,7 +93,6 @@ const PatientPage = () => {
           <LocalizationProvider dateAdapter={AdapterDayjs}>
 
              <DateTimePicker
-            disablePast
             label='Select A Date and Time'
               format="DD-MM-YYYY    H"
               views={["day",'hours']}
@@ -110,29 +107,6 @@ const PatientPage = () => {
                 setAppointmentTime(dayjs(newValue).format('H'));
               }}
             />
-            {/* <DatePicker
-              sx={{ marginRight: 2, marginBottom: 2 }}
-              disablePast
-              label='Select A Date'
-              format="DD-MM-YYYY"
-              value={appointmentDate}
-              onChange={(newValue) => {
-                // console.log(dayjs(newValue).format('YYYY-MM-DD'));
-                setAppointmentDate(dayjs(newValue).format('YYYY-MM-DD'))
-              }}
-            />
-            <TimePicker
-              label="Select Appointment Time"
-              views={['hours']}
-              ampm={false}
-              minTime={dayjs().set('hour', 8)}
-              maxTime={dayjs().set('hour', 17)}
-              value={appointmentTime}
-              onChange={(newValue) => {
-                // console.log(dayjs(newValue).format('h A'));
-                setAppointmentTime(dayjs(newValue).format('H'))
-              }}
-            /> */}
           </LocalizationProvider>
 
           <Box sx={{ width: 200, marginBottom: 3 }}>

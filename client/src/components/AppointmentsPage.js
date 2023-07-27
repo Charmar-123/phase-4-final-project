@@ -5,12 +5,11 @@ import { Typography, Button } from '@mui/material';
 import { Box, TextField } from '@mui/material'
 
 import dayjs from 'dayjs';
-import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
+import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
+
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
-import { DatePicker } from '@mui/x-date-pickers/DatePicker';
-import { TimePicker } from '@mui/x-date-pickers/TimePicker';
 import { UserContext } from './UserContext.js'
-import { DateTimePicker } from '@mui/x-date-pickers';
+import { DateTimePicker } from "@mui/x-date-pickers/DateTimePicker";
 const AppointmentsPage = () => {
 
 
@@ -104,45 +103,22 @@ const AppointmentsPage = () => {
           <LocalizationProvider dateAdapter={AdapterDayjs}>
 
             <DateTimePicker
-              disablePast
+              // disablePast
+              views={["day", 'hours']}
+              ampm={false}
               label='Select A Date and Time'
               format="DD-MM-YYYY    H"
               minDate={dayjs()}
               maxDate={dayjs().add(30, "day")}
               minTime={dayjs().set("hour", 8)}
               maxTime={dayjs().set("hour", 17)}
-              views={["day", 'hours']}
-              ampm={false}
+              
               value={dayjs(`${appointmentDate} ${appointmentTime}`)}
               onChange={(newValue) => {
                 setAppointmentDate(dayjs(newValue).format('YYYY-MM-DD'));
                 setAppointmentTime(dayjs(newValue).format('H'));
               }}
             />
-            {/* <DatePicker
-              sx={{ marginRight: 2, marginBottom: 2 }}
-              disablePast
-              label='Select A Date'
-              format="DD-MM-YYYY"
-              value={dayjs(appointmentDate)}
-              onChange={(newValue) => {
-                console.log(dayjs(newValue).format('YYYY-MM-DD'));
-                setAppointmentDate(dayjs(newValue).format('YYYY-MM-DD'))
-              }}
-            />
-            <TimePicker
-              sx={{ marginRight: 2, marginBottom: 2 }}
-              label="Select Appointment Time"
-              views={['hours']}
-              ampm={false}
-              minTime={dayjs().set('hour', 8)}
-              maxTime={dayjs().set('hour', 17)}
-              value={dayjs(appointmentTime, 'H')}
-              onChange={(newValue) => {
-                console.log(dayjs(newValue).format('H'));
-                setAppointmentTime(dayjs(newValue).format('H'))
-              }}
-            /> */}
           </LocalizationProvider>
 
 
