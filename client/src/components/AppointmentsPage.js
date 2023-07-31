@@ -49,7 +49,7 @@ const AppointmentsPage = () => {
 
   const handleSubmitEditAppointment = (e) => {
     e.preventDefault();
-    // console.log("submit");
+
     fetch(`/appointments/${params.id}`, {
       method: 'PATCH',
       headers: { 'Content-Type': 'application/json' },
@@ -59,8 +59,7 @@ const AppointmentsPage = () => {
         reason_for_visit: appointmentRFV,
 
 
-        // Check why your sending back doctor
-        // doctor: doctor
+
       })
     }).then(res => {
       if (res.ok) {
@@ -91,18 +90,18 @@ const AppointmentsPage = () => {
           <LocalizationProvider dateAdapter={AdapterDayjs}>
 
             <DateTimePicker
-     
+
               views={["day", 'hours']}
               ampm={false}
               label='Select A Date and Time'
               format="DD-MM-YYYY    H"
               minDate={dayjs()}
               maxDate={dayjs().add(30, "day")}
-              minTime={ dayjs(`${appointmentDate} ${appointmentTime}`).isSame(dayjs(), "day") && dayjs().isAfter(dayjs().set("hour", 8))
-              ? dayjs()
-              : dayjs(`${appointmentDate} ${appointmentTime}`).set("hour", 8)}
+              minTime={dayjs(`${appointmentDate} ${appointmentTime}`).isSame(dayjs(), "day") && dayjs().isAfter(dayjs().set("hour", 8))
+                ? dayjs()
+                : dayjs(`${appointmentDate} ${appointmentTime}`).set("hour", 8)}
               maxTime={dayjs().set("hour", 17)}
-              
+
               value={dayjs(`${appointmentDate} ${appointmentTime}`)}
               onChange={(newValue) => {
                 setAppointmentDate(dayjs(newValue).format('YYYY-MM-DD'));
@@ -110,12 +109,31 @@ const AppointmentsPage = () => {
               }}
             />
           </LocalizationProvider>
+          {errors.date && errors.date.map((err, index) => {
+            return (
+              <Box key={index}>
+                <Typography variant='h9'>{err}</Typography>
+              </Box>
+            )
+
+          })}
 
 
-          <TextField
-            value={appointmentRFV}
-            onChange={(e) => setAppointmentRFV(e.target.value)} label="Reason for visit" variant="outlined"
-          />
+          <Box>
+            <TextField
+              value={appointmentRFV}
+              onChange={(e) => setAppointmentRFV(e.target.value)} label="Reason for visit" variant="outlined"
+            />
+            {errors.reason_for_visit && errors.reason_for_visit.map((err, index) => {
+              return (
+                <Box key={index}>
+                  <Typography variant='h9'>{err}</Typography>
+                </Box>
+              )
+
+            })}
+          </Box>
+
           <Button
             sx={{ marginLeft: 3 }}
             variant='contained'

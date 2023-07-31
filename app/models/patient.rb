@@ -6,6 +6,7 @@ class Patient < ApplicationRecord
 
     validates :email, presence: true, format: { with: URI::MailTo::EMAIL_REGEXP, message: "Invalid email format" }
     validates :date_of_birth, presence: true, format: { with: /\A\d{4}-\d{2}-\d{2}\z/, message: "must be in the format yyyy-mm-dd" }
+    validates :email, uniqueness: true
 
     private
 

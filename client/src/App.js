@@ -30,7 +30,6 @@ const {setDoctorsData} = useContext(UserContext)
       .then(res => res.json())
       .then(data => setDoctorsData(data))
   }, [])
-  // console.log({...loggedInPatient, appointments: [...loggedInPatient.appointments, newAppointment] });
 
 
   return (

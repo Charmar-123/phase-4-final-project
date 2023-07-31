@@ -13,12 +13,7 @@ const PatientPortal = () => {
     const navigate = useNavigate();
     const { setLoggedInPatient } = useContext(UserContext);
 
-    const [formData, setFormData] = useState({
-        signUpName: '',
-        signUpEmail: '',
-        signUpDateOfBirth: '',
-        signUpPassword: ''
-    })
+
 
     const [loginData, setLoginData] = useState({
         email: '',
@@ -28,7 +23,6 @@ const PatientPortal = () => {
     const [errors, setErrors] = useState([]);
 
 
-    const { signUpName, signUpDateOfBirth, signUpEmail, signUpPassword } = formData
     useEffect(() => {
         fetch('/authorized/patient')
             .then(res => {
@@ -50,11 +44,7 @@ const PatientPortal = () => {
         const { name, value } = e.target;
         setLoginData({ ...loginData, [name]: value })
     }
-    const handleChangeSignUp = (e) => {
 
-        const { name, value } = e.target;
-        setFormData({ ...formData, [name]: value })
-    }
 
     const { email, password } = loginData;
     const handleSubmit = (e) => {
@@ -92,36 +82,6 @@ const PatientPortal = () => {
     }
 
 
-    const handleCreatePatient = (e) => {
-        e.preventDefault()
-        const patient = {
-            name: signUpName,
-            date_of_birth: signUpDateOfBirth,
-            email: signUpEmail,
-            password: signUpPassword
-        }
-
-        fetch(`/patients`, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(patient)
-        })
-            .then(res => {
-                if (res.ok) {
-                    res.json().then(patient => {
-                        setLoggedInPatient(patient)
-                        navigate(`/patients/login`)
-                    })
-                } else {
-                    res.json().then(json => {
-                        console.log(json.errors);
-                        setErrors(json.errors)
-                    })
-                }
-            })
-
-
-    }
     return (
         <Container>
             <Typography>

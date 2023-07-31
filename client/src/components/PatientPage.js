@@ -30,22 +30,22 @@ const PatientPage = () => {
 
   useEffect(() => {
     fetch('/authorized/patient')
-        .then(res => {
-            if (res.ok) {
-                res.json().then(patient => {
-                    setLoggedInPatient(patient)
-                    navigate(`/patients/${patient.id}`)
-                })
-            }
-            else {
-                res.json().then(json => {
-                    console.log(json.errors);
-                    setErrors(json.errors)
-                })
-            }
-        })
+      .then(res => {
+        if (res.ok) {
+          res.json().then(patient => {
+            setLoggedInPatient(patient)
+            navigate(`/patients/${patient.id}`)
+          })
+        }
+        else {
+          res.json().then(json => {
+            console.log(json.errors);
+            setErrors(json.errors)
+          })
+        }
+      })
 
-}, [])
+  }, [])
 
   const handleLogOut = () => {
     fetch('/logout', {
@@ -91,7 +91,6 @@ const PatientPage = () => {
           res.json().then(json => {
             console.log(json.errors);
             setErrors(json.errors)
-            alert(json.errors.appointment)
           })
         }
       })
@@ -109,15 +108,15 @@ const PatientPage = () => {
 
           <LocalizationProvider dateAdapter={AdapterDayjs}>
 
-             <DateTimePicker
-            label='Select A Date and Time'
+            <DateTimePicker
+              label='Select A Date and Time'
               format="DD-MM-YYYY    H"
-              views={["day",'hours']}
+              views={["day", 'hours']}
               minDate={dayjs()}
               maxDate={dayjs().add(30, "day")}
-              minTime={ dayjs(`${appointmentDate} ${appointmentTime}`).isSame(dayjs(), "day") && dayjs().isAfter(dayjs().set("hour", 8))
-              ? dayjs()
-              : dayjs(`${appointmentDate} ${appointmentTime}`).set("hour", 8)}
+              minTime={dayjs(`${appointmentDate} ${appointmentTime}`).isSame(dayjs(), "day") && dayjs().isAfter(dayjs().set("hour", 8))
+                ? dayjs()
+                : dayjs(`${appointmentDate} ${appointmentTime}`).set("hour", 8)}
               maxTime={dayjs().set("hour", 17)}
               ampm={false}
               value={dayjs(`${appointmentDate} ${appointmentTime}`)}
@@ -127,6 +126,14 @@ const PatientPage = () => {
               }}
             />
           </LocalizationProvider>
+          {errors.date && errors.date.map((err, index) => {
+            return (
+              <Box key={index}>
+                <Typography variant='h9'>{err}</Typography>
+              </Box>
+            )
+
+          })}
 
           <Box sx={{ width: 200, marginBottom: 3 }}>
             <FormControl fullWidth>
@@ -144,11 +151,27 @@ const PatientPage = () => {
 
               </Select>
             </FormControl>
+            {errors.doctor && errors.doctor.map((err, index) => {
+                        return (
+                            <Box key={index}>
+                                <Typography variant='h9'>{err}</Typography>
+                            </Box>
+                        )
+
+                    })}
           </Box>
 
 
 
           <TextField onChange={(e) => setAppointmentRFV(e.target.value)} label="Reason for visit" variant="outlined" />
+          {errors.reason_for_visit && errors.reason_for_visit.map((err, index) => {
+                        return (
+                            <Box key={index}>
+                                <Typography variant='h9'>{err}</Typography>
+                            </Box>
+                        )
+
+                    })}
           <Button
             sx={{ marginLeft: 3 }}
             variant='contained'
