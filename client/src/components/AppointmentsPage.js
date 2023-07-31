@@ -81,7 +81,7 @@ const AppointmentsPage = () => {
     <>
 
       <Box sx={{ marginTop: 5, marginLeft: 5 }} display={viewAppFrom ? '' : 'none'}>
-        <Typography sx={{ marginBottom: 2 }} variant='h3'>Book Your Appointment</Typography>
+        <Typography sx={{ marginBottom: 2 }} variant='h3'>Edit Your Appointment</Typography>
 
         <form
           onSubmit={handleSubmitEditAppointment}
@@ -119,7 +119,7 @@ const AppointmentsPage = () => {
           })}
 
 
-          <Box>
+          <Box sx={{marginTop: 5}}>
             <TextField
               value={appointmentRFV}
               onChange={(e) => setAppointmentRFV(e.target.value)} label="Reason for visit" variant="outlined"

@@ -69,8 +69,7 @@ const DoctorPortal = () => {
                 }
                 else {
                     res.json().then(json => {
-                        console.log(json.errors);
-                        setErrors(json.errors)
+                        alert(json.errors)
                     })
                 }
             })
@@ -79,13 +78,15 @@ const DoctorPortal = () => {
 
 
     return (
-        <Container>
-            <Typography>
+        <Container sx={{marginLeft: 5, marginTop: 5, border: 2, width: 520, paddingTop: 3}}>
+            <Typography variant='h4' sx={{marginBottom: 5}}>
                 Doctor Login
             </Typography>
             <form onSubmit={handleSubmit}>
 
                 <TextField
+                sx={{marginRight: 1}}
+                    label='Email Address'
                     name='email'
                     value={email}
                     onChange={handleChange}
@@ -93,13 +94,17 @@ const DoctorPortal = () => {
 
                 </TextField>
                 <TextField
+                    label='Password'
                     name='password'
+                    type="password"
                     value={password}
                     onChange={handleChange}
                 >
 
                 </TextField>
                 <Button
+                variant='contained'
+                sx={{marginTop: 2, marginBottom: 3}}
                     type='submit'
                 >
                     Login

@@ -135,7 +135,7 @@ const PatientPage = () => {
 
           })}
 
-          <Box sx={{ width: 200, marginBottom: 3 }}>
+          <Box sx={{ width: 200, marginBottom: 3, marginTop: 3 }}>
             <FormControl fullWidth>
               <InputLabel>Doctor</InputLabel>
               <Select
@@ -152,26 +152,26 @@ const PatientPage = () => {
               </Select>
             </FormControl>
             {errors.doctor && errors.doctor.map((err, index) => {
-                        return (
-                            <Box key={index}>
-                                <Typography variant='h9'>{err}</Typography>
-                            </Box>
-                        )
+              return (
+                <Box key={index}>
+                  <Typography variant='h9'>{err}</Typography>
+                </Box>
+              )
 
-                    })}
+            })}
           </Box>
 
 
 
           <TextField onChange={(e) => setAppointmentRFV(e.target.value)} label="Reason for visit" variant="outlined" />
           {errors.reason_for_visit && errors.reason_for_visit.map((err, index) => {
-                        return (
-                            <Box key={index}>
-                                <Typography variant='h9'>{err}</Typography>
-                            </Box>
-                        )
+            return (
+              <Box key={index}>
+                <Typography variant='h9'>{err}</Typography>
+              </Box>
+            )
 
-                    })}
+          })}
           <Button
             sx={{ marginLeft: 3 }}
             variant='contained'
@@ -182,20 +182,22 @@ const PatientPage = () => {
       </Box>
 
 
+      <Box sx={{marginLeft: 5}}>
+        <Typography sx={{ marginTop: 5 }} variant='h4'>Welcome {name}</Typography>
 
-      <Typography sx={{ marginTop: 5 }} variant='h4'>Welcome {name}</Typography>
+        <Button
+          variant='contained'
 
-      <Button
-        variant='contained'
+          onClick={() => setViewAppForm(true)}
+        >Book Appointment</Button>
+        <Button
+          sx={{ marginLeft: 3 }}
+          variant='contained'
+          color="error"
+          onClick={handleLogOut}
+        >LOGOUT</Button>
+      </Box>
 
-        onClick={() => setViewAppForm(true)}
-      >Book Appointment</Button>
-      <Button
-        sx={{ marginLeft: 3 }}
-        variant='contained'
-        color="error"
-        onClick={handleLogOut}
-      >LOGOUT</Button>
       <TableContainer component={Paper}>
         <Table>
           <TableHead>

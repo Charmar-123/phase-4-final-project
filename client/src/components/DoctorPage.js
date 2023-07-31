@@ -2,7 +2,7 @@ import React, { useContext } from 'react'
 import { UserContext } from './UserContext.js'
 import { useNavigate } from 'react-router-dom'
 
-import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Button, Typography } from '@mui/material';
+import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Button, Typography, Box } from '@mui/material';
 
 const DoctorPage = () => {
 
@@ -28,13 +28,16 @@ const DoctorPage = () => {
   return (
 
     <>
-      <Typography>Welcome {name}</Typography>
-      <Typography>{department}</Typography>
-      <Button
-        variant='contained'
-        color="error"
-        onClick={handleLogOut}
-      >LOGOUT</Button>
+      <Box sx={{ marginLeft: 5 }}>
+        <Typography>Welcome {name}</Typography>
+        <Typography>{department}</Typography>
+        <Button
+          variant='contained'
+          color="error"
+          onClick={handleLogOut}
+        >LOGOUT</Button>
+      </Box>
+
       <TableContainer component={Paper}>
         <Table>
           <TableHead>

@@ -70,12 +70,10 @@ const PatientPortal = () => {
                 }
                 else {
                     res.json().then(json => {
-                        json.errors.forEach((err) => {
-                            alert(err)
-                        })
+                      
                         // console.log(json.errors);
                         // setErrors(json.errors)
-                        // alert(json.errors)
+                        alert(json.errors)
                     })
                 }
             })
@@ -83,8 +81,8 @@ const PatientPortal = () => {
 
 
     return (
-        <Container>
-            <Typography>
+        <Container  sx={{marginLeft: 5, marginTop: 5, border: 2, width: 520, paddingTop: 3}}>
+            <Typography variant='h4' sx={{marginBottom: 5}}>
                 Patient Login
             </Typography>
             <form onSubmit={handleSubmit}>
@@ -100,17 +98,22 @@ const PatientPortal = () => {
                 <TextField
                     label='Password'
                     name='password'
+                    type="password"
                     value={password}
                     onChange={handleChange}
                 >
 
                 </TextField>
                 <Button
+                variant='contained'
+                sx={{marginTop: 2, marginBottom: 3, marginRight: 1}}
                     type='submit'
                 >
                     Login
                 </Button>
                 <Button
+                variant='contained'
+                sx={{marginTop: 2, marginBottom: 3}}
                 onClick={() => navigate('/patients/signUp')}>
                     SignUp
                 </Button>
