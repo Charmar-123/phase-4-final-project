@@ -16,9 +16,6 @@ import { DateTimePicker } from "@mui/x-date-pickers/DateTimePicker";
 
 const PatientPage = () => {
 
-  
-  const [appointmentData, setAppointmentData] = useState([])
-
   const [errors, setErrors] = useState('')
   const [viewAppFrom, setViewAppForm] = useState(false);
   const navigate = useNavigate();
@@ -31,7 +28,24 @@ const PatientPage = () => {
   const [appointmentDoctor, setAppointmentDoctor] = useState('');
   const [appointmentRFV, setAppointmentRFV] = useState('');
 
+  useEffect(() => {
+    fetch('/authorized/patient')
+        .then(res => {
+            if (res.ok) {
+                res.json().then(patient => {
+                    setLoggedInPatient(patient)
+                    navigate(`/patients/${patient.id}`)
+                })
+            }
+            else {
+                res.json().then(json => {
+                    console.log(json.errors);
+                    setErrors(json.errors)
+                })
+            }
+        })
 
+}, [])
 
   const handleLogOut = () => {
     fetch('/logout', {
@@ -69,7 +83,7 @@ const PatientPage = () => {
       .then(res => {
         if (res.ok) {
           res.json().then((appointment) => {
-            // console.log(appoinment);
+            console.log(appointment);
             addAppointment(appointment)
             setViewAppForm(false)
           })

@@ -40,16 +40,16 @@ const DoctorPage = () => {
           <TableHead>
             <TableRow>
               <TableCell>Name</TableCell>
-              <TableCell>Age</TableCell>
+              <TableCell>Date Of Birth</TableCell>
               <TableCell>History</TableCell>
               <TableCell>Email</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
-            {loggedInDoctor.patients && loggedInDoctor.patients.map(({ id, name, age, history, email }) => (
+            {loggedInDoctor.patients && loggedInDoctor.patients.map(({ id, name, date_of_birth, history, email }) => (
               <TableRow key={id}>
                 <TableCell>{name}</TableCell>
-                <TableCell>{age}</TableCell>
+                <TableCell>{date_of_birth}</TableCell>
                 <TableCell>{history}</TableCell>
                 <TableCell>{email}</TableCell>
               </TableRow>
