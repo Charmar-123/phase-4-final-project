@@ -21,7 +21,9 @@ const Doctors = () => {
     return (
         <Grid container spacing={2}
         justifyContent="center"
-        alignItems="center">
+        alignItems="center"
+        marginLeft={1}
+       >
             {doctors}
         </Grid>
     )

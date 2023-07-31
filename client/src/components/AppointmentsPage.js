@@ -119,7 +119,7 @@ const AppointmentsPage = () => {
           })}
 
 
-          <Box sx={{marginTop: 5}}>
+          <Box sx={{ marginTop: 5 }}>
             <TextField
               value={appointmentRFV}
               onChange={(e) => setAppointmentRFV(e.target.value)} label="Reason for visit" variant="outlined"
@@ -135,7 +135,7 @@ const AppointmentsPage = () => {
           </Box>
 
           <Button
-            sx={{ marginLeft: 3 }}
+            sx={{ marginTop: 3 }}
             variant='contained'
             color="error"
             type='submit'
@@ -153,16 +153,19 @@ const AppointmentsPage = () => {
         <Typography>Reason For Visit: {reason_for_visit}</Typography>
         <Typography>Doctor: {doctor_name}</Typography>
         <Typography>Department: {doctor_department}</Typography>
-        <Button
-          variant='contained'
-          color="error"
-          onClick={handleDeleteAppointment}
-        >Cancel Appointment</Button>
-        <Button
-          sx={{ marginLeft: 3 }}
-          variant='contained'
-          onClick={() => setViewAppForm(true)}
-        >Edit Appointment</Button>
+        <Box sx={{marginTop:2}}>
+          <Button
+            variant='contained'
+            color="error"
+            onClick={handleDeleteAppointment}
+          >Cancel Appointment</Button>
+          <Button
+            sx={{ marginLeft: 3 }}
+            variant='contained'
+            onClick={() => setViewAppForm(true)}
+          >Edit Appointment</Button>
+        </Box>
+
       </Box>
 
 
