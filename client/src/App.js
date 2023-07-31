@@ -13,6 +13,7 @@ import PatientPage from './components/PatientPage';
 import AppointmentsPage from './components/AppointmentsPage';
 
 import { UserContext } from './components/UserContext';
+import SignUpPatient from './components/SignUpPatient';
 
 
 const App = () => {
@@ -45,6 +46,7 @@ const {setDoctorsData} = useContext(UserContext)
           <Route path='/patients/:id' element={<PatientPage />} />
           <Route path='/patients/login' element={<PatientPortal />} />
           <Route path='/appointments/:id' element={<AppointmentsPage />} />
+          <Route path='/patients/signUp' element={<SignUpPatient />} />
 
         </Routes>
     </>

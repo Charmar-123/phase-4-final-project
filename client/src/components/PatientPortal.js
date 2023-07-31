@@ -150,91 +150,13 @@ const PatientPortal = () => {
                 >
                     Login
                 </Button>
+                <Button
+                onClick={() => navigate('/patients/signUp')}>
+                    SignUp
+                </Button>
             </form>
 
-            <Box flexDirection='column' width={250}>
-                <Typography>
-                    Sign Up
-                </Typography>
-                <form onSubmit={handleCreatePatient}>
-
-                    <TextField
-                        label='Full Name'
-                        name='signUpName'
-                        value={signUpName}
-                        onChange={handleChangeSignUp}
-                    >
-
-                    </TextField>
-                    {errors.name && errors.name.map(err => {
-                    return (
-                        <Box>
-                            <Typography variant='h9'>{err}</Typography>
-                        </Box>
-                    )
-
-                })}
-         
-                    <TextField
-                        label='Email Address'
-                        name='signUpEmail'
-                        value={signUpEmail}
-                        onChange={handleChangeSignUp}
-                    >
-
-                    </TextField>
-                    {errors.email && errors.email.map(err => {
-                        return (
-                            <Box sx={{ borderWidth: 3, borderColor: 'black' }}>
-                                <Typography variant='h9'>{err}</Typography>
-                            </Box>
-
-                        )
-
-                    })}
-                    <TextField
-                        label='Birthday(YYYY-MM-DD)'
-                        name='signUpDateOfBirth'
-                        value={signUpDateOfBirth}
-                        onChange={handleChangeSignUp}
-                    >
-
-                    </TextField>
-                    {errors.date_of_birth && errors.date_of_birth.map(err => {
-                    return (
-                        <Box>
-                            <Typography variant='h9'>{err}</Typography>
-                        </Box>
-                    )
-
-                })}
-                    <TextField
-                        label='Password'
-                        name='signUpPassword'
-                        value={signUpPassword}
-                        onChange={handleChangeSignUp}
-                    >
-
-                    </TextField>
-                    {errors.password && errors.password.map(err => {
-                    return (
-                        <Box>
-                            <Typography variant='h9'>{err}</Typography>
-                        </Box>
-                    )
-
-                })}
-                    <Button
-                        type='submit'
-                    >
-                        Sign Up
-                    </Button>
-                </form>
-
             
-             
-        
-            </Box>
 
         </Container>
     )
