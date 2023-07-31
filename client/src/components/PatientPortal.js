@@ -88,6 +88,7 @@ const PatientPortal = () => {
             <form onSubmit={handleSubmit}>
 
                 <TextField
+                sx={{marginRight: 1}}
                     label='Email Address'
                     name='email'
                     value={email}
