@@ -16,6 +16,7 @@ npm start --prefix client
 
 ## Usage
 
-![](https://github.com/Charmar-123/phase-4-final-project-hospital-managerblob/main/hospital-manager-gif.gif)
+
 With the hospital manager, doctors can view their patients. Patients can log in, sign up, view, and book appointments.
 
+![](https://github.com/Charmar-123/phase-4-final-project-hospital-manager/blob/main/hospital-manager-gif.gif)
