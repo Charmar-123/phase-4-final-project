@@ -1,21 +1,24 @@
 class PatientsController < ApplicationController
-    before_action :authorized_patient 
+    before_action :authorized_patient, except: [:create]
     
     
 
-    def doctor_app
-        render json: Doctor.all.map{|doc| {"doctor_id": doc.id, "doctor_name": doc.name, "appointments": doc.appointments.map{|app| 
-            {"date": app.date,
-            "time": app.time
-            }
-            }}}
-    end
     
     def show
         patient = current_patient
         render json: patient, status: :ok
     end
-    
 
+    
+    def create
+        patient = Patient.create!(patient_params)
+        render json: patient, status: :created
+    end
+    
+    private 
+
+    def patient_params
+        params.permit(:name, :age, :email, :password)
+    end 
  
 end
