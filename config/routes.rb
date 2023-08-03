@@ -1,9 +1,9 @@
 Rails.application.routes.draw do
   
 
-  resources :appointments
-  resources :patients
-  resources :doctors
+  resources :appointments, only: [:create, :show, :update, :destroy]
+  resources :patients, only: [:show, :create]
+  resources :doctors, only: [:index, :show]
 
   # Custom routes
   post '/doctors/login', to: 'sessions#create_doctor'
@@ -12,7 +12,6 @@ Rails.application.routes.draw do
   get '/authorized/doctor', to: 'doctors#show'
   get '/authorized/patient', to: 'patients#show'
 
-  get '/doctor_app', to: 'patients#doctor_app'
 
 
   # Routing logic: fallback requests for React Router.

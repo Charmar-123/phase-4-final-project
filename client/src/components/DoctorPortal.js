@@ -22,7 +22,7 @@ const DoctorPortal = () => {
                 else {
                     res.json().then(json => {
                         console.log(json.errors);
-                        setErrors(json.errors)
+                   
                     })
                 }
             })
@@ -38,7 +38,7 @@ const DoctorPortal = () => {
         password: ''
     });
 
-    const [errors, setErrors] = useState([]);
+
 
     const handleChange = (e) => {
 

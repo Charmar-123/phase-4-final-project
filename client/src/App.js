@@ -1,6 +1,6 @@
 
 import './App.css';
-import { useEffect, useState, useContext } from 'react';
+import { useEffect, useContext } from 'react';
 import { Route, Routes } from 'react-router-dom';
 import Doctors from './components/Doctors';
 import NavigationBar from './components/NavigationBar';

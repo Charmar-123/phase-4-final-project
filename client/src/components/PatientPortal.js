@@ -1,6 +1,6 @@
 import React, { useContext, useState, useEffect } from 'react';
 
-import { Container, Typography, TextField, Button, Box, } from '@mui/material';
+import { Container, Typography, TextField, Button } from '@mui/material';
 
 import { useNavigate } from 'react-router-dom';
 
@@ -20,7 +20,6 @@ const PatientPortal = () => {
         password: ''
     });
 
-    const [errors, setErrors] = useState([]);
 
 
     useEffect(() => {

@@ -1,4 +1,4 @@
-import React, { useContext, useState, useEffect } from 'react'
+import React, { useContext, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import { Typography, Button } from '@mui/material';
 
@@ -21,7 +21,7 @@ const AppointmentsPage = () => {
 
   const selectedAppointment = loggedInPatient.appointments.find(app => app.id === parseInt(params.id));
 
-  const { id, date, time, reason_for_visit, doctor_name, doctor_department } = selectedAppointment;
+  const { date, time, reason_for_visit, doctor_name, doctor_department } = selectedAppointment;
 
 
 
