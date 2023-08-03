@@ -29,7 +29,7 @@ const DoctorPage = () => {
 
     <>
       <Box sx={{ marginLeft: 5 }}>
-        <Typography>Welcome {name}</Typography>
+        <Typography sx={{ marginTop: 5 }} variant='h4'>Welcome {name}</Typography>
         <Typography>{department}</Typography>
         <Button
           variant='contained'

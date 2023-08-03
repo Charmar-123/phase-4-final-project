@@ -89,8 +89,8 @@ const PatientPage = () => {
           })
         } else {
           res.json().then(json => {
-            console.log(json.errors);
-            setErrors(json.errors)
+     
+            alert(json.errors.appointment)
           })
         }
       })
